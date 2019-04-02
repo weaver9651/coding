@@ -39,6 +39,8 @@ bool check(int index) {
   return true;
 }
 
+
+// && 연산 시 check를 앞에 둠으로써 만약 check에서 false가 나면 뒤는 자동으로 계산하지 않음.
 bool go(int index) {
   if (index == N) return true;
   if (sign[index][index] == 0) {
@@ -49,6 +51,7 @@ bool go(int index) {
     ans[index] = sign[index][index] * i;
     if (check(index) && go(index + 1)) return true;
   }
+  return false;
 }
 
 int main () {
