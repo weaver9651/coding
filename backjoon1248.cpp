@@ -4,68 +4,58 @@
 
 using namespace std;
 
-char S[10][10];
-vector<int> A(11);
+int sign[10][10];
+int ans[10];
 int N;
 
 void In() {
+  char tmp;
   cin >> N;
   for (int i = 0; i < N; i++) {
     for (int j = i; j < N; j++) {
-      cin >> S[i][j];
+      cin >> tmp;
+      if (tmp == '-')
+	sign[i][j] = -1;
+      else if (tmp == '+')
+	sign[i][j] = 1;
+      else if (tmp == '0')
+	sign[i][j] = 0;
     }
   }
-
-  for (int i = 0; i <= 10; i++) {
-    A[i] = i;
-  }
 }
 
-int signToInt(char sign) {
-  if (sign == '-')
-    return -1;
-  else if (sign == '+')
-    return 1;
-  else return 0;
-}
-
-int calc(int i, int j) {
-  int result = 0;
-  for (int k = i; k <= j; k++) {
-    result += signToInt(S[k][k]) * A[k];
-  }
-  return result;
-}
-
-void findAns(){
-  sort(A.begin(), A.end());
-  int tmp;
-  int flag;
-  do {
-    if (A[0] == 1 && A[1] == 3 && A[2] == 2 && A[3] == 4 )
-      cout << "";
-    flag = 0;
-    for (int i = 0; i < N; i++) {
-      for (int j = i; j < N; j++) {
-	tmp = calc(i, j);
-	if (((tmp > 0) ? 1 : ((tmp < 0) ? -1 : 0)) != signToInt(S[i][j])) {
-	  flag = 1;
-	  break;
-	}
-      }
-      if (flag == 1)
-	break;
+bool check(int index) {
+  int sum = 0;
+  for (int i = index; i >= 0; i--) {
+    sum += ans[i];
+    if (sign[i][index] == 0) {
+      if (sum != 0) return false;
+    } else if (sign[i][index] < 0) {
+      if (sum >= 0) return false;
+    } else if (sign[i][index] < 0) {
+      if (sum <= 0) return false;
     }
-    if (flag == 0)
-      break;
-  } while (next_permutation(A.begin(), A.end()));
+  }
+  return true;
+}
+
+bool go(int index) {
+  if (index == N) return true;
+  if (sign[index][index] == 0) {
+      ans[index] = 0;
+      return check(index) && go(index + 1);
+    }
+  for (int i = 1; i<= 10; i++) {
+    ans[index] = sign[index][index] * i;
+    if (check(index) && go(index + 1)) return true;
+  }
 }
 
 int main () {
   In();
-  findAns();
+  go(0);
   for (int i = 0; i < N; i++) {
-    cout << signToInt(S[i][i])*A[i] << " ";
+    cout << ans[i] << " ";
   }
   cout << endl;
   
