@@ -5,8 +5,8 @@ using namespace std;
 bool Map[15][15];
 bool isRow[15] = {false, }; 
 bool isCol[15] = {false, }; 
-bool isNegd[15] = {false, }; 
-bool isPosd[15] = {false, };
+bool isNegd[30] = {false, }; 
+bool isPosd[30] = {false, };
 int counter = 0;
 
 int N;
