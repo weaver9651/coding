@@ -14,7 +14,7 @@ int main () {
   cin >> B >> C;
 
   // find the number of supervisor
-  int ans = 0;
+  long long ans = 0;
   for (int i = 0; i < N; i++) {
     int remain = A[i] - B;
     if (remain <= 0) {
