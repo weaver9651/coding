@@ -9,7 +9,7 @@ bool Map[1001][1001] = {false, };
 bool visit[1001] = {false, };
 int N, M, V;
 
-void bfs(int start) { // queue
+void bfs(int start) {
   queue<int> q;
   q.push(start);
   visit[start] = true;
@@ -31,26 +31,16 @@ void bfs(int start) { // queue
   cout << endl;
 }
 
-void dfs(int start) { // stack
-  vector<int> q;
-  q.push_back(start);
-  visit[start] = true;
-
-  int cur_node;
-  while(!q.empty()) {
-    cur_node = q.back();
-    q.pop_back();
-
-    cout << cur_node << " ";
-
-    for (int i = 1; i <= N; i++) {
-      if (!visit[i] && Map[cur_node][i]) {
-	visit[i] = true;
-	q.push_back(i);
-      }
+void dfs(int node) {
+  visit[node] = true;
+  cout << node << " ";
+  for (int i = 1; i <= N; i++) {
+    if (node == i)
+      continue;
+    if (!visit[i] && Map[node][i]) {
+      dfs(i);
     }
   }
-  cout << endl;
 }
 
 void init() {
@@ -71,8 +61,9 @@ int main () {
   }
 
   dfs(V);
+  cout << endl;
   init();
   bfs(V);
-  
+
   return 0;
 }
