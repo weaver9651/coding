@@ -9,7 +9,7 @@ bool Map[1001][1001] = {false, };
 bool visit[1001] = {false, };
 int N, M, V;
 
-void bfs(int start) { // queue
+void bfs(int start) {
   queue<int> q;
   q.push(start);
   visit[start] = true;
