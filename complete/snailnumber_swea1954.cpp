@@ -56,6 +56,7 @@ int main () {
     cin >> N;
     init();
     snail();
+    printf("#%d\n", tc+1);
     Out();
   }
   
