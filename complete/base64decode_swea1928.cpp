@@ -65,6 +65,7 @@ int main () {
   for (int tc = 0; tc < T; tc++) {
     string s;
     cin >> s;
+    printf("#%d ", tc+1);
     decoder(s);
   }
   
