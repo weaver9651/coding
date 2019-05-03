@@ -28,21 +28,20 @@ void init() {
 bool bfs(int src, int dst) {
   queue<int> q;
   q.push(src);
-  int cur, tmp;
+  int cur;
 
   while (!q.empty()) {
     cur = q.front();
     q.pop();
 
-    if (cur == dst) {
-      init();
-      return true;
-    }
-
     for (int i = 0; i < N; i++) {
       if (i == cur)
 	continue;
       if (edge[cur][i] && !visit[i]) {
+	if (i == dst) {
+	  init();
+	  return true;
+	}
 	q.push(i);
 	visit[i] = true;
       }
