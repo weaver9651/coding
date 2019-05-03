@@ -39,6 +39,7 @@ void In() {
     }
     bool visit[13] = {false, };
     ps(arr, visit, N, 0, 0);
+    cout<< endl;
   }
 }
 
