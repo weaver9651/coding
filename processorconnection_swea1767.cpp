@@ -47,8 +47,16 @@ bool makeRoad(int **arr, int y, int x, int d) {
   int cur_y = y + dy[d];
   int cur_x = x + dx[d];
   while (isInside(cur_y, cur_x)) {
-    if (arr[cur_y][cur_x])
+    if (arr[cur_y][cur_x]) {
+      int tmp_y = cur_y;
+      int tmp_x = cur_x;
+      cur_y = y + dy[d];
+      cur_x = x + dx[d];
+      while (isInside(cur_y, cur_x) && !(cur_y == tmp_y && cur_x == tmp_x)) {
+	arr[cur_y][cur_x] = 0;
+      }
       return false;
+    }
     
     arr[cur_y][cur_x] = 2;
     cur_y += dy[d];
@@ -95,26 +103,21 @@ void solve(int **arr, int index, int corenum) {
       newarr[i] = new int[N];
       copy(arr[i], arr[i]+N, newarr[i]);
     }
-    int **newarr2 = new int*[N];
-    for (int i = 0; i < N; i++) {
-      newarr2[i] = new int[N];
-      copy(arr[i], arr[i]+N, newarr2[i]);
-    }
-
+    
     // copy array end
     if (makeRoad(newarr, coreQ[index].first, coreQ[index].second, d)) {
       solve(newarr, index+1, corenum+1);
-      for (int i = 0; i < N; i++) {
-	delete newarr[i];
-      }
-      delete[] newarr;
+    //   for (int i = 0; i < N; i++) {
+    // 	delete newarr[i];
+    //   }
+    //   delete[] newarr;
     }
     else {
-      solve(newarr2, index+1, corenum);
-      for (int i = 0; i < N; i++) {
-	delete newarr[i];
-      }
-      delete[] newarr;
+      solve(newarr, index+1, corenum);
+      // for (int i = 0; i < N; i++) {
+      // 	delete newarr[i];
+      // }
+      // delete[] newarr;
     }
   }
 }
