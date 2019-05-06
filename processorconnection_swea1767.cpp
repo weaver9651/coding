@@ -66,6 +66,10 @@ int calc(int **arr) {
 void solve(int **arr, int index) {
   if (index == N) {
     minn = min(minn, calc(arr));
+    for (int i = 0; i < N; i++) {
+      delete arr[i];
+    }
+    delete[] arr;
     return;
   }
   for (int d = 0; d < 4; d++) {
