@@ -103,7 +103,11 @@ int main () {
       copy(Map[i], Map[i]+N, newarr[i]);
     }
     solve(newarr, 0);
-    printf("#%d %d\n", tc+1, minn);;
+    printf("#%d %d\n", tc+1, minn);
+    for (int i = 0; i < N; i++) {
+      delete newarr[i];
+    }
+    delete[] newarr;
   }
   
   return 0;
