@@ -63,8 +63,19 @@ int calc(int **arr) {
   return counter;
 }
 
+// for debugging
+void Out(int **arr) {
+  cout << endl;
+  for (int i = 0; i < N; i++){
+    for (int j = 0; j < N; j++) {
+      cout << arr[i][j] << " ";
+    }
+    cout << endl;
+  }
+}
+
 void solve(int **arr, int index) {
-  if (index == N) {
+  if (index == coreQ.size()) {
     minn = min(minn, calc(arr));
     for (int i = 0; i < N; i++) {
       delete arr[i];
