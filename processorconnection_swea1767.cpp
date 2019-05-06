@@ -104,9 +104,17 @@ void solve(int **arr, int index, int corenum) {
     // copy array end
     if (makeRoad(newarr, coreQ[index].first, coreQ[index].second, d)) {
       solve(newarr, index+1, corenum+1);
+      for (int i = 0; i < N; i++) {
+	delete newarr[i];
+      }
+      delete[] newarr;
     }
     else {
       solve(newarr2, index+1, corenum);
+      for (int i = 0; i < N; i++) {
+	delete newarr[i];
+      }
+      delete[] newarr;
     }
   }
 }
