@@ -8,14 +8,15 @@ using namespace std;
 int N;
 int Map[12][12];
 vector <pair<int, int> > coreQ;
-int minn;
+int minn[13];
+int maxcore;
 
 int dy[] = {-1, 0, 1, 0};
 int dx[] = {0, 1, 0, -1};
 
 void In() {
   cin >> N;
-  minn = N*N;
+  maxcore = 0;
   while (!coreQ.empty()) {
     coreQ.pop_back();
   }
@@ -29,6 +30,10 @@ void In() {
       }
     }
   }
+  for (int i = 0; i <= coreQ.size() ; i++) {
+    minn[i] = N*N;
+  }
+
 }
 
 bool isInside(int y, int x) {
@@ -63,7 +68,6 @@ int calc(int **arr) {
   return counter;
 }
 
-// for debugging
 void Out(int **arr) {
   cout << endl;
   for (int i = 0; i < N; i++){
@@ -74,9 +78,10 @@ void Out(int **arr) {
   }
 }
 
-void solve(int **arr, int index) {
+void solve(int **arr, int index, int corenum) {
   if (index == coreQ.size()) {
-    minn = min(minn, calc(arr));
+    maxcore = max(maxcore, corenum);
+    minn[corenum] = min(minn[corenum], calc(arr));
     for (int i = 0; i < N; i++) {
       delete arr[i];
     }
@@ -90,15 +95,18 @@ void solve(int **arr, int index) {
       newarr[i] = new int[N];
       copy(arr[i], arr[i]+N, newarr[i]);
     }
+    int **newarr2 = new int*[N];
+    for (int i = 0; i < N; i++) {
+      newarr2[i] = new int[N];
+      copy(arr[i], arr[i]+N, newarr2[i]);
+    }
+
     // copy array end
     if (makeRoad(newarr, coreQ[index].first, coreQ[index].second, d)) {
-      solve(newarr, index+1);
+      solve(newarr, index+1, corenum+1);
     }
     else {
-      for (int i = 0; i < N; i++) {
-	delete newarr[i];
-      }
-      delete[] newarr;
+      solve(newarr2, index+1, corenum);
     }
   }
 }
@@ -113,8 +121,8 @@ int main () {
       newarr[i] = new int[N];
       copy(Map[i], Map[i]+N, newarr[i]);
     }
-    solve(newarr, 0);
-    printf("#%d %d\n", tc+1, minn);
+    solve(newarr, 0, 0);
+    printf("#%d %d\n", tc+1, minn[maxcore]);
     for (int i = 0; i < N; i++) {
       delete newarr[i];
     }
