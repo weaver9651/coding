@@ -30,7 +30,6 @@ int main () {
 	else if (tmpi == 2)
 	  students[i] += tmp * 0.2;
       }
-      cout << students[i] << endl;
     }
 
     double pivot = students[K-1];
