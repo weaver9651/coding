@@ -30,9 +30,10 @@ int main () {
 	else if (tmpi == 2)
 	  students[i] += tmp * 0.2;
       }
+      cout << students[i] << endl;
     }
 
-    int pivot = students[K-1];
+    double pivot = students[K-1];
     int counter = 0;
     for (int i = 0; i < N; i++) {
       if (students[i] > pivot)
