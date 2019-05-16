@@ -20,7 +20,7 @@ int main () {
 	maxx = tmp;
     }
     sum = sum - minn - maxx;
-    printf("#%d %d\n", tc+1, sum / 8);
+    printf("#%d %lld\n", tc+1, sum / 8);
   }
   
   return 0;
