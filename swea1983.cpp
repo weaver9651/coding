@@ -13,22 +13,29 @@ string grades[10] = {
 
 int main () {
   int T;
+  cin >> T;
   for (int tc = 0; tc < T; tc++) {
     int N, K;
     scanf("%d%d", &N, &K);
-    int *students = new int[N];
-    int tmp;
+    double *students = new double[N];
+    double tmp;
     for (int i = 0; i < N; i++) {
       students[i] = 0;
       for (int tmpi = 0 ; tmpi < 3; tmpi++) {
-	scanf("%d", &tmp);
-	students[i] += tmp;
+	scanf("%lf", &tmp);
+	if (tmpi == 0)
+          students[i] += tmp * 0.35;
+	else if (tmpi == 1)
+	  students[i] += tmp * 0.45;
+	else if (tmpi == 2)
+	  students[i] += tmp * 0.2;
       }
+      cout << students[i] << endl;
     }
 
     int pivot = students[K-1];
     int counter = 0;
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < N; i++) {
       if (students[i] > pivot)
 	counter++;
     }
