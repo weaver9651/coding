@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <iostream>
+#include <cmath>
 
 using namespace std;
 
@@ -10,7 +11,7 @@ int main () {
     int tmp;
     int maxx = 0;
     int minn = 10000;
-    long long sum = 0;
+    double sum = 0;
     for (int i = 0; i < 10; i++) {
       scanf("%d", &tmp);
       sum += tmp;
@@ -20,7 +21,7 @@ int main () {
 	maxx = tmp;
     }
     sum = sum - minn - maxx;
-    printf("#%d %lld\n", tc+1, sum / 8);
+    printf("#%d %d\n", tc+1, (int)round(sum / 8));
   }
   
   return 0;
