@@ -47,17 +47,23 @@ void findNum(int y, int x, string cur, int index) {
 }
 
 int main () {
-  In();
-  string cur;
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      findNum(i, j, cur, 0);
+  int T;
+  cin >> T;
+  for (int tc = 0; tc < T; tc++) {
+    In();
+    string cur;
+    for (int i = 0; i < 4; i++) {
+      for (int j = 0; j < 4; j++) {
+	findNum(i, j, cur, 0);
+      }
+    }
+    sort(results.begin(), results.end());
+    results.erase(unique(results.begin(), results.end()), results.end());
+
+    printf("#%d %d\n", tc+1, results.size());
+    while(!results.empty()) {
+      results.pop_back();
     }
   }
-  sort(results.begin(), results.end());
-  results.erase(unique(results.begin(), results.end()), results.end());
-
-  cout << results.size() << endl;
-  
   return 0;
 }
