@@ -1,4 +1,5 @@
 #include <cstdio>
+#include <iostream>
 
 using namespace std;
 
@@ -56,8 +57,16 @@ int main () {
     int N, K;
     scanf("%d%d", &N, &K);
 
-    N = cutdown(N, K);
-    printf("#%d %d\n", tc+1, gcd(N, K));
+    int result;
+    if (N >= K) {
+      result = K;
+    }
+    else {
+      N = cutdown(N, K);
+      // cout << N << endl;
+      result = gcd(N, K);
+    }
+    printf("#%d %d\n", tc+1, result);
   }
 
   return 0;  
