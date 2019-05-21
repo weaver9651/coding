@@ -102,20 +102,24 @@ void Out() {
 int main () {
   srand(static_cast<unsigned int>(time(0)));
 
-  In();
-  int counter = 0;
-  while (!isExit) {
-    action(Map[cur_y][cur_x]);
-    counter++;
-    if (isExit) {
-      printf("YES\n");
-    }
+  int T;
+  scanf("%d", &T);
+  for (int tc = 0; tc < T; tc++) {
+    In();
+    int counter = 0;
+    while (!isExit) {
+      action(Map[cur_y][cur_x]);
+      counter++;
+      if (isExit) {
+	printf("#%d YES\n", tc+1);
+      }
     
-    if (counter == 1000) {
-      printf("NO\n");
-      break;
-    }
+      if (counter == 1000) {
+	printf("#%d NO\n", tc+1);
+	break;
+      }
     
+    }
   }
   
   return 0;
