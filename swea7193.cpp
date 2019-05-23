@@ -5,7 +5,7 @@
 using namespace std;
 
 int NtoDec(int N, long long X) {
-  int result = 0;
+  long long result = 0;
   int counter = 0;
   while (X) {
     result += (X % 10) * pow(N, counter);
@@ -23,9 +23,9 @@ int main () {
     int N;
     long long X;
     cin >> N >> X;
-    int result = 0;
+    long long result = 0;
     result = NtoDec(N, X) % (N-1);
-    printf("#%d %d\n", tc+1, result);
+    printf("#%d %lld\n", tc+1, result);
   }
   
   return 0;
