@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int NtoDec(int N, int X) {
+int NtoDec(int N, long long X) {
   int result = 0;
   int counter = 0;
   while (X) {
@@ -20,7 +20,8 @@ int main () {
   int T;
   cin >> T;
   for (int tc = 0; tc < T; tc++) {
-    int N, X;
+    int N;
+    long long X;
     cin >> N >> X;
     int result = 0;
     result = NtoDec(N, X) % (N-1);
