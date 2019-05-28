@@ -22,7 +22,7 @@ int main () {
     for (int i = 0; i < N; i++) {
       char *a = new char[MAX+2];
       fgets(a, sizeof(char)*(MAX+2), stdin);
-      a[strlen(a)-1] = NULL;
+      a[strlen(a)-1] = NULL; // get rid of '\n'
       tmp = string(a);
       ptr[tmp.size()].push_back(tmp);
     }

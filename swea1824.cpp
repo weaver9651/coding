@@ -22,7 +22,7 @@ void In() {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
       scanf("%c", &Map[i][j]);
-      state[i][j] = 0;
+      state[i][j] = -1;
     }
     scanf("%c", &tmp);
   }
@@ -99,6 +99,13 @@ void Out() {
   }
 }
 
+// bool isEnd() {
+//   int a = state[cur_y][cur_x];
+//   int b = mem;
+//   if (state = )
+  
+// }
+
 int main () {
   srand(static_cast<unsigned int>(time(0)));
 
@@ -113,12 +120,14 @@ int main () {
       if (isExit) {
 	printf("#%d YES\n", tc+1);
       }
-    
-      if (counter == 1000) {
-	printf("#%d NO\n", tc+1);
-	break;
-      }
-    
+      // if (counter == 10000) {
+      // 	printf("#%d NO\n", tc+1);
+      // }
+
+      // if (Map[cur_y][cur_x] == '|' || Map[cur_y][cur_x] == '_') {
+	
+      // }
+      // Map[cur_y][cur_x] = mem;
     }
   }
   
