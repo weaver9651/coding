@@ -33,7 +33,7 @@ int main () {
 	sort(ptr[i].begin(), ptr[i].end());
 	ptr[i].erase(unique(ptr[i].begin(), ptr[i].end()), ptr[i].end());
 	for (vector<string>::iterator iter = ptr[i].begin(); iter != ptr[i].end(); iter++) {
-	  cout << *iter << endl;
+	  printf("%s\n", (*iter).c_str());
 	}
       }
     }
