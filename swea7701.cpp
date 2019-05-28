@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
+#include <cstring>
 #include <vector>
 #include <algorithm>
 #define MAX 50
@@ -14,10 +15,15 @@ int main () {
     int N;
     cin >> N;
     vector<string> *ptr = new vector<string>[MAX + 1];
-  
+
+    char dummy;
+    scanf("%c", &dummy);
     string tmp;
     for (int i = 0; i < N; i++) {
-      cin >> tmp;
+      char *a = new char[MAX+2];
+      fgets(a, sizeof(char)*(MAX+2), stdin);
+      a[strlen(a)-1] = NULL;
+      tmp = string(a);
       ptr[tmp.size()].push_back(tmp);
     }
 
