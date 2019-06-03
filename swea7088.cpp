@@ -9,10 +9,25 @@ int main () {
     int N, Q;
     scanf("%d%d", &N, &Q);
 
-    int *arr = new int[N];
+    int **arr = new int*[N];
+    for (int i = 0; i < N; i++) {
+      arr[i] = new int[4];
+      for (int j = 0; j < 4; j++) {
+	arr[i][j] = 0;
+      }
+    }
+    
     int tmp;
     for (int i = 0; i < N; i++) {
-      scanf("%d", &arr[i]);
+      scanf("%d", &tmp);
+      arr[i][tmp]++;
+
+      if (i == 0)
+	continue;
+      
+      arr[i][1] += arr[i-1][1];
+      arr[i][2] += arr[i-1][2];
+      arr[i][3] += arr[i-1][3];
     }
 
     int a, b;
@@ -20,20 +35,20 @@ int main () {
     printf("#%d\n", tc);
     for (int i = 0; i < Q; i++) {
       scanf("%d%d", &a, &b);
-      num1 = 0, num2 = 0, num3 = 0;
-      for (int j = a-1; j <= b-1; j++) {
-	switch(arr[j]) {
-	case 1:
-	  num1++;
-	  break;
-	case 2:
-	  num2++;
-	  break;
-	case 3:
-	  num3++;
-	  break;
-	}
+      a--;
+      b--;
+
+      if (a == 0) {
+	num1 = arr[b][1];
+	num2 = arr[b][2];
+	num3 = arr[b][3];
       }
+      else {
+	num1 = arr[b][1] - arr[a-1][1];
+	num2 = arr[b][2] - arr[a-1][2];
+	num3 = arr[b][3] - arr[a-1][3];
+      }
+            
       printf("%d %d %d\n", num1, num2, num3);
     }
   }
