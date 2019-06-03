@@ -51,7 +51,7 @@ int main () {
     }
 
     if (h2-h1-carry2 < 0) {
-      h = h2-h1-carry1 + 24;
+      h = h2-h1-carry2 + 24;
     }
     else {
       h = h2-h1-carry2;
