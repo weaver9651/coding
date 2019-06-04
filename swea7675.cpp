@@ -75,12 +75,12 @@ int main () {
     printf("#%d\n", tc);
     int N;
     scanf("%d", &N);
-    int tmp;
+    char tmp;
     scanf("%c", &tmp);
     char buf[1000];
     fgets(buf, 1000, stdin);
     string s = (string)buf;
-    s[s.size()-1] = NULL;
+    //    s[s.size()-1] = NULL;
 
     vector<string> sentences;
     s = dot(s);
