@@ -118,7 +118,7 @@ int main () {
   cin >> T;
   for (int tc = 1; tc <= T; tc++) {
     In();
-    printf("#%d %d", tc, findAnswer());
+    printf("#%d %d\n", tc, findAnswer());
     init();
   }
   
