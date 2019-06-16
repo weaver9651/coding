@@ -4,27 +4,9 @@
 using namespace std;
 
 int score[301];
-int maxx[301];
+int maxx = 0;
 bool chain[301] = {false, };
 int N;
-
-int findAnswer() {
-  maxx[1] = score[1];
-  maxx[2] = score[2] + score[1];
-  for (int i = 3; i <= N; i++) {
-    bool flag = chain[i-1];
-    if (flag) {
-      maxx[i] = score[i] + maxx[i-2];
-      chain[i] = false;
-    }
-    else {
-      maxx[i] = score[i] + maxx[i-1];
-      chain[i] = true;
-    }
-  }
-
-  return maxx[N];
-}
 
 void In() {
   cin >> N;
@@ -33,9 +15,28 @@ void In() {
   }
 }
 
+void dp(int cur, int counter, int index) {
+  if (index == N) {
+    maxx = max(maxx, cur);
+    return;
+  }
+  if (index > N)
+    return;
+  
+  if (counter != 2) {
+    dp(cur+score[index+1], counter+1, index+1);
+  }
+  dp(cur+score[index+2], 1, index+2);
+}
+
+void findAnswer() {
+  dp(score[1], 0, 1);
+}
+
 int main () {
   In();
-  cout << findAnswer() << endl;  
+  findAnswer();
+  cout << maxx << endl;
   
   return 0;
 }
