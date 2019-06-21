@@ -1,15 +1,15 @@
 #include <iostream>
 #include <cstdio>
 #include <queue>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
 
-int X, Y;
 bool visit[10001] = {false, };
 int counter[10001];
 // cur, operand, hop
-queue<pair<int, pair<int, int> > > q;
+vector<pair<int, int> > q;
 
 bool isInside(int num) {
   if (num >= 0 && num <= 10000)
@@ -19,31 +19,36 @@ bool isInside(int num) {
 }
 
 void bfs() {
-  q.push(make_pair(0, make_pair(1, 0)));
+  int maxx = 0;
+  int sizee;
+  q.push_back(make_pair(0, 1));
   visit[0] = true;
   int cur, tmp, operand, hop;
 
   while (!q.empty()) {
-    cur = q.front().first;
-    operand = q.front().second.first;
-    hop = q.front().second.second;
+    sizee = q.size();
+    maxx = max(maxx, sizee);
+    cur = q.back().first;
+    operand = q.back().second;
     
-    q.pop();
+    q.pop_back();
+
+    tmp = cur + 1;
+    if (isInside(tmp) && !visit[tmp]) {
+      q.push_back(make_pair(tmp, 2));
+      visit[tmp] = true;
+      counter[tmp] = counter[cur] + 1;
+    }
 
     tmp = cur + operand;
     if (isInside(tmp) && !visit[tmp]) {
-      q.push(make_pair(tmp, make_pair(operand+1, hop+1)));
+      q.push_back(make_pair(tmp, operand+1));
       visit[tmp] = true;
       counter[tmp] = counter[cur] + 1;
     }
     
-    tmp = cur + 1;
-    if (isInside(tmp) && !visit[tmp]) {
-      q.push(make_pair(tmp, make_pair(2, hop+1)));
-      visit[tmp] = true;
-      counter[tmp] = counter[cur] + 1;
-    }
   }
+  cout << maxx << endl;
 }
 
 void init() {
@@ -53,6 +58,7 @@ void init() {
 }
 
 int main () {
+  q.reserve(160);
   init();
   bfs();
 
