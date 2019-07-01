@@ -28,6 +28,8 @@ int main () {
 	H = h;
 	break;
       }
+      if (h == 1)
+	H = 0;
     }
     printf("#%d %d\n", tc, H);
     init(nums);
