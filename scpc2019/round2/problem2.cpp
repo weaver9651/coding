@@ -28,22 +28,35 @@ int getPoint(int *arrA, int *arrB, int maxx) {
   return counter;
 }
 
+bool isPlus(int *arrA, int *arrB, int start, int end) {
+  int cur = 0;
+  int next = 0;
+  for (int i = 0; i <= end-start; i++) {
+    if (arrA[start+i] == arrB[start+i])
+      cur++;
+    if (arrA[start+i] == arrB[end-i])
+      next++;
+  }
+  if (next > cur)
+    return true;
+  else
+    return false;
+}
+
 int findAnswer(int *arrA, int *arrB) {
   int maxx = 0;
   maxx = getPoint(arrA, arrB, maxx);
   for (int i = 0; i < N-1; i++) {
     for (int j = i+1; j < N; j++) {
       int cur_score = 0;
-      int *tmp = flipArr(arrB, i, j);
-      cur_score = getPoint(arrA, tmp, maxx);
-      // maxx = max(maxx, cur_score);
-      if (cur_score > maxx) {
-	maxx = cur_score;
-	// for (int i = 0; i < N; i++)
-	//   printf("%d ", tmp[i]);
-	// cout << endl;
+      if (isPlus(arrA, arrB, i, j)) {
+	int *tmp = flipArr(arrB, i, j);
+	cur_score = getPoint(arrA, tmp, maxx);
+	if (cur_score > maxx) {
+	  maxx = cur_score;
+	}
+	delete [] tmp;
       }
-      delete [] tmp;
     }
   }
   return maxx;
