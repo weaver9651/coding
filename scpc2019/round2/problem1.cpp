@@ -47,6 +47,11 @@ bool isPrime(int num) {
 void findScore(string s, int score) {
   if (isPrime(stoi(s)))
     score++;
+  else {
+    maxx = max(maxx, score);
+    return;
+  }
+    
   if (s.size() == 1) {
     maxx = max(maxx, score);
     return;
@@ -81,7 +86,7 @@ int main () {
     else {
       scoreB = 0;
     }
-    // cout << scoreA << " " << scoreB << endl;
+    cout << scoreA << " " << scoreB << endl;
     printf("Case #%d\n", tc);
     scoreA > scoreB ? printf("%d\n", 1) : scoreA < scoreB ? printf("%d\n", 2) : printf("%d\n", 3);
   }
