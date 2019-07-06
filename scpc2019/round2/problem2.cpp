@@ -7,7 +7,7 @@ using namespace std;
 int N;
 
 int *flipArr(int *arr, int start, int end) {
-  int *result = new int[end];
+  int *result = new int[N];
   copy(arr, arr+N, result);
   for (int i = 0; i <= end-start; i++) {
     result[start+i] = arr[end-i];
@@ -16,9 +16,11 @@ int *flipArr(int *arr, int start, int end) {
   return result;
 }
 
-int getPoint(int *arrA, int *arrB) {
+int getPoint(int *arrA, int *arrB, int maxx) {
   int counter = 0;
   for (int i = 0; i < N; i++) {
+    if (counter+N-i < maxx)
+      break;
     if (arrA[i] == arrB[i])
       counter++;
   }
@@ -28,11 +30,12 @@ int getPoint(int *arrA, int *arrB) {
 int findAnswer(int *arrA, int *arrB) {
   int *tmp;
   int maxx = 0;
+  maxx = getPoint(arrA, arrB, maxx);
   for (int i = 0; i < N-1; i++) {
     for (int j = i+1; j < N; j++) {
       int cur_score = 0;
       tmp = flipArr(arrB, i, j);
-      cur_score = getPoint(arrA, tmp);
+      cur_score = getPoint(arrA, tmp, maxx);
       // maxx = max(maxx, cur_score);
       if (cur_score > maxx) {
 	maxx = cur_score;
