@@ -26,15 +26,21 @@ bool isPrime(int num) {
     
     else {
       if (num % i == 0) {
-	return false;
+  	return false;
       }
       else {
-	for (int j = i; j <= range; j+=i) {
-	  arr[j] = 0;
-	}
+  	for (int j = i; j <= range; j+=i) {
+  	  arr[j] = 0;
+  	}
       }	
     }
   }
+
+  // // naive version
+  // for (int i = 2; i <= range; i++) {
+  //   if ((num % i) == 0)
+  //     return false;
+  // }
   return true;
 }
 
@@ -57,18 +63,36 @@ int main () {
   int T;
   scanf("%d", &T);
   for (int tc = 1; tc <= T; tc++) {
-    int A, B;
+    int A, B, scoreA, scoreB;
     scanf("%d%d", &A, &B);
-    findScore(to_string(A), 0);
-    int scoreA = maxx;
-    maxx = 0;
-    findScore(to_string(B), 0);
-    int scoreB = maxx;
-    maxx = 0;
-
+    if (isPrime(A)) {
+      findScore(to_string(A), 0);
+      scoreA = maxx;
+      maxx = 0;
+    }
+    else {
+      scoreA = 0;
+    }
+    if (isPrime(B)) {
+      findScore(to_string(B), 0);
+      scoreB = maxx;
+      maxx = 0;
+    }
+    else {
+      scoreB = 0;
+    }
+    // cout << scoreA << " " << scoreB << endl;
     printf("Case #%d\n", tc);
     scoreA > scoreB ? printf("%d\n", 1) : scoreA < scoreB ? printf("%d\n", 2) : printf("%d\n", 3);
   }
+
+  // // test
+  // int A;
+  // scanf("%d", &A);
+  // findScore(to_string(A), 0);
+  // int scoreA = maxx;
+  // maxx = 0;
+  // cout << scoreA << endl;
 
   return 0;
 }
