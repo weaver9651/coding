@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdio>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -28,13 +29,12 @@ int getPoint(int *arrA, int *arrB, int maxx) {
 }
 
 int findAnswer(int *arrA, int *arrB) {
-  int *tmp;
   int maxx = 0;
   maxx = getPoint(arrA, arrB, maxx);
   for (int i = 0; i < N-1; i++) {
     for (int j = i+1; j < N; j++) {
       int cur_score = 0;
-      tmp = flipArr(arrB, i, j);
+      int *tmp = flipArr(arrB, i, j);
       cur_score = getPoint(arrA, tmp, maxx);
       // maxx = max(maxx, cur_score);
       if (cur_score > maxx) {
@@ -43,6 +43,7 @@ int findAnswer(int *arrA, int *arrB) {
 	//   printf("%d ", tmp[i]);
 	// cout << endl;
       }
+      delete [] tmp;
     }
   }
   return maxx;
@@ -64,6 +65,8 @@ int main () {
 
     int result = findAnswer(arrA, arrB);
     printf("Case #%d\n%d\n", tc, result);
+    delete [] arrA;
+    delete [] arrB;
   }
 
   // // debug
