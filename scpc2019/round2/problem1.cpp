@@ -2,10 +2,13 @@
 #include <cstdio>
 #include <string>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
 // stoi(string), to_string(int)
+
+int maxx = 0;
 
 bool isPrime(int num) {
   if (num == 1) return false;
@@ -35,23 +38,37 @@ bool isPrime(int num) {
   return true;
 }
 
-int findScore(int num) {
-  string s = to_string(num);
-  int score = 0;
-  for (int i = 0; i < s.size(); i++) {
+void findScore(string s, int score) {
+  if (isPrime(stoi(s)))
+    score++;
+  if (s.size() == 1) {
+    maxx = max(maxx, score);
+    return;
+  }
+
+  for (int i = 0; i < s.size(); i ++) {
     string cpy = s;
     cpy.erase(i, 1);
-    int tmp_num = stoi(cpy);
-    if (isPrime(tmp_num))
-      score++;
+    findScore(cpy, score);
   }
-  return score;
 }
 
 int main () {
-  int A;
-  scanf("%d", &A);
-  int scoreA = findScore(A);
+  int T;
+  scanf("%d", &T);
+  for (int tc = 1; tc <= T; tc++) {
+    int A, B;
+    scanf("%d%d", &A, &B);
+    findScore(to_string(A), 0);
+    int scoreA = maxx;
+    maxx = 0;
+    findScore(to_string(B), 0);
+    int scoreB = maxx;
+    maxx = 0;
+
+    printf("Case #%d\n", tc);
+    scoreA > scoreB ? printf("%d\n", 1) : scoreA < scoreB ? printf("%d\n", 2) : printf("%d\n", 3);
+  }
 
   return 0;
 }
