@@ -55,7 +55,7 @@ int findMax() {
     tot[i][1] = tot[i-1][0] + arr[i];
     tot[i][2] = tot[i-1][1] + arr[i];
   }
-    return max(tot[N-1][0], tot[N-1][1], tot[N-1][2]);
+    return max(tot[N-1][1], tot[N-1][2]);
 }
 
 int main () {
