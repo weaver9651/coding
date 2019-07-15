@@ -1,42 +1,68 @@
 #include <iostream>
 #include <cstdio>
+#include <algorithm>
+#include <vector>
 
 using namespace std;
 
-int score[301];
-int maxx = 0;
-bool chain[301] = {false, };
+int arr[300];
+int tot[300][3];
 int N;
 
 void In() {
-  cin >> N;
-  for (int i = 1; i <= N; i++) {
-    scanf("%d", &score[i]);
+  scanf("%d", &N);
+  for (int i = 0; i < N; i++) {
+    scanf("%d", &arr[i]);
   }
 }
 
-void dp(int cur, int counter, int index) {
-  if (index == N) {
-    maxx = max(maxx, cur);
-    return;
+int max(int a, int b, int c) {
+  if (a > b) {
+    if (a > c)
+      return a;
+    else
+      return c;
   }
-  if (index > N)
-    return;
+  else {
+    if (b > c)
+      return b;
+    else
+      return c;
+  }
+}
+
+int findMax() {
+  // base cases
+  tot[0][0] = arr[0];
+  tot[0][1] = arr[0];
+  tot[0][2] = arr[0];
+  if (N == 1)
+    return tot[0][1];
   
-  if (counter != 2) {
-    dp(cur+score[index+1], counter+1, index+1);
+  tot[1][0] = arr[0];
+  tot[1][1] = arr[0] + arr[1];
+  tot[1][2] = arr[0] + arr[1];
+  if (N == 2)
+    return tot[1][1];
+  
+  tot[2][0] = tot[1][2];
+  tot[2][1] = tot[0][0] + arr[2];
+  tot[2][2] = tot[1][2] + arr[2];
+ 
+  
+  for (int i = 3; i < N; i++) {
+    tot[i][0] = tot[i-1][2];
+    tot[i][1] = tot[i-1][0] + arr[i];
+    tot[i][2] = tot[i-1][1] + arr[i];
   }
-  dp(cur+score[index+2], 1, index+2);
-}
-
-void findAnswer() {
-  dp(score[1], 0, 1);
+    return max(tot[N-1][0], tot[N-1][1], tot[N-1][2]);
 }
 
 int main () {
   In();
-  findAnswer();
-  cout << maxx << endl;
+  int result = findMax();
+
+  printf("%d\n", result);
   
   return 0;
 }
