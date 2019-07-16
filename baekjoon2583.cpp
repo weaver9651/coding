@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -97,6 +98,7 @@ int main () {
 	dfs(i, j);
 
   printf("%d\n", results.size());
+  sort(results.begin(), results.end());
   for (vector<int>::iterator it = results.begin(); it != results.end(); it++)
     printf("%d ", *it);
   printf("\n");
