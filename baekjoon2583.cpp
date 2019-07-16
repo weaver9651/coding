@@ -96,6 +96,7 @@ int main () {
       if(!visit[i][j] && !isInbox(i, j))
 	dfs(i, j);
 
+  printf("%d\n", results.size());
   for (vector<int>::iterator it = results.begin(); it != results.end(); it++)
     printf("%d ", *it);
   printf("\n");
