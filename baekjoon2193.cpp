@@ -2,10 +2,10 @@
 
 using namespace std;
 
-int findAns(int N) {
-  int **arr = new int*[N+1];
+long long findAns(int N) {
+  long long **arr = new long long*[N+1];
   for (int i = 0; i <= N; i++) {
-    arr[i] = new int[2];
+    arr[i] = new long long[2];
   }
   
   arr[1][0] = 0;
@@ -27,8 +27,8 @@ int findAns(int N) {
 int main () {
   int N;
   scanf("%d", &N);
-  int result = findAns(N);
-  printf("%d\n", result);
+  long long result = findAns(N);
+  printf("%lld\n", result);
   
   return 0;
 }
