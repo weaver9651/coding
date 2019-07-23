@@ -15,7 +15,7 @@ int R, C;
 char Map[50][50];
 int start_y, start_x;
 int dest_y, dest_x;
-int water_y, water_x;
+int water_y = -1, water_x = -1;
 bool visit[50][50];
 int dy[] = {0, 0, 1, -1};
 int dx[] = {1, -1, 0, 0};
@@ -67,7 +67,8 @@ int bfs() {
   buffer.push(make_pair(start_y, start_x));
   visit[start_y][start_x] = true;
 
-  wbuffer.push(make_pair(water_y, water_x));
+  if (water_y != -1)
+    wbuffer.push(make_pair(water_y, water_x));
 
   while (!q.empty() || !buffer.empty()) {
     time++;
@@ -104,7 +105,7 @@ int bfs() {
       for (int i = 0; i < 4; i++) {
 	tmp_y = cur_y + dy[i];
 	tmp_x = cur_x + dx[i];
-	if (isInside(tmp_y, tmp_x) && !visit[tmp_y][tmp_x] &&
+	if (isInside(tmp_y, tmp_x) && // !visit[tmp_y][tmp_x] &&
 	    (Map[tmp_y][tmp_x] == '.' || Map[tmp_y][tmp_x] == 'D')) {
 	  buffer.push(make_pair(tmp_y, tmp_x));
 	  visit[tmp_y][tmp_x] = true;
