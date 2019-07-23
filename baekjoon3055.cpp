@@ -16,7 +16,8 @@ char Map[50][50];
 int start_y, start_x;
 int dest_y, dest_x;
 int water_y = -1, water_x = -1;
-bool visit[50][50];
+bool visit[50][50] = {false, };
+bool wvisit[50][50] = {false, };
 int dy[] = {0, 0, 1, -1};
 int dx[] = {1, -1, 0, 0};
 
@@ -85,8 +86,10 @@ int bfs() {
 	wtmp_y = wcur_y + dy[i];
 	wtmp_x = wcur_x + dx[i];
 	if (isInside(wtmp_y, wtmp_x) &&
-	    (Map[wtmp_y][wtmp_x] == '.' || Map[wtmp_y][wtmp_x] == 'S')) {
+	    (Map[wtmp_y][wtmp_x] == '.' || Map[wtmp_y][wtmp_x] == 'S') &&
+	    !wvisit[wtmp_y][wtmp_x]) {
 	  Map[wtmp_y][wtmp_x] = '*';
+	  wvisit[wtmp_y][wtmp_x] = true;
 	  wbuffer.push(make_pair(wtmp_y, wtmp_x));
 	}
       }
@@ -105,7 +108,7 @@ int bfs() {
       for (int i = 0; i < 4; i++) {
 	tmp_y = cur_y + dy[i];
 	tmp_x = cur_x + dx[i];
-	if (isInside(tmp_y, tmp_x) && // !visit[tmp_y][tmp_x] &&
+	if (isInside(tmp_y, tmp_x) && !visit[tmp_y][tmp_x] &&
 	    (Map[tmp_y][tmp_x] == '.' || Map[tmp_y][tmp_x] == 'D')) {
 	  buffer.push(make_pair(tmp_y, tmp_x));
 	  visit[tmp_y][tmp_x] = true;
