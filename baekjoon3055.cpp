@@ -15,11 +15,15 @@ int R, C;
 char Map[50][50];
 int start_y, start_x;
 int dest_y, dest_x;
-int water_y = -1, water_x = -1;
 bool visit[50][50] = {false, };
 bool wvisit[50][50] = {false, };
 int dy[] = {0, 0, 1, -1};
 int dx[] = {1, -1, 0, 0};
+
+queue<pair<int, int> > q;
+queue<pair<int, int> > buffer;
+queue<pair<int, int> > wq;
+queue<pair<int, int> > wbuffer;
 
 void In() {
   char tmp;
@@ -38,8 +42,7 @@ void In() {
 	start_x = j;
       }
       if (tmp == '*') {
-	water_y = i;
-	water_x = j;
+	wbuffer.push(make_pair(i, j));
       }
     }
     scanf("%c", &tmp); // remove newline
@@ -59,17 +62,10 @@ int bfs() {
   int wcur_y, wcur_x;
   int wtmp_y, wtmp_x;
 
-  queue<pair<int, int> > q;
-  queue<pair<int, int> > buffer;
-  queue<pair<int, int> > wq;
-  queue<pair<int, int> > wbuffer;
   int time = 0;
   
   buffer.push(make_pair(start_y, start_x));
   visit[start_y][start_x] = true;
-
-  if (water_y != -1)
-    wbuffer.push(make_pair(water_y, water_x));
 
   while (!q.empty() || !buffer.empty()) {
     time++;
