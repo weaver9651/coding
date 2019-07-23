@@ -115,16 +115,36 @@ int bfs() {
     }
     
   } // bfs start while end
+  
   return 0;
 } // bfs function end
 
+void init() {
+  for (int i = 0; i < R; i++) {
+    for (int j = 0; j < C; j++) {
+      visit[i][j] = false;
+    }
+  }
+}
+
+void Out() {
+  for (int i = 0; i < R; i++) {
+    for (int j = 0; j < C; j++) {
+      printf("%c", Map[i][j]);
+    }
+    printf("\n");
+  }
+}
+
 int main () {
   In();
+  // Out();
   int result = bfs();
   if (result)
     printf("%d\n", result);
   else
     printf("KAKTUS\n");
+  init();
   
   return 0;
 }
