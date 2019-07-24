@@ -53,16 +53,16 @@ int bfs(int src, int dst) {
 int findAns() {
   int minn = 100000000;
   int index;
-  int *kb = new int[N+1];
+  int kb;
   for (int i = 1; i <= N; i++) {
-    kb[i] = 0;
+    kb = 0;
     for (int j = 1; j <= N; j++) {
       if (i == j)
 	continue;
-      kb[i] += bfs(i, j);
+      kb += bfs(i, j);
     }
-    if (kb[i] < minn) {
-      minn = kb[i];
+    if (kb < minn) {
+      minn = kb;
       index = i;
     }
   }
