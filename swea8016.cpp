@@ -1,21 +1,17 @@
-#include <cstdio>
+#include <iostream>
+
+typedef unsigned long long ull;
 
 using namespace std;
 
-unsigned long long leftP(int n) {
-  return 2*n*n - 4*n + 3;
-}
-
-unsigned long long rightP(int n) {
-  return 2*n*n - 1;
-}
-
 int main () {
   int T, N;
-  scanf("%d", &T);
+  cin >> T;
   for (int tc = 1; tc <= T; tc++) {
-    scanf("%d", &N);
-    printf("#%d %llu %llu\n", tc, leftP(N), rightP(N));
+    cin >> N;
+    ull left = (N-1)*(N-1)*2 + 1;
+    ull right = 2*N*N - 1;
+    cout << "#" << tc << " " << left << " " << right << endl;
   }
   
   return 0;
