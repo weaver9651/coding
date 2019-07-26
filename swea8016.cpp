@@ -2,20 +2,12 @@
 
 using namespace std;
 
-int leftP(int num) {
-  int result = 1;
-  for (int i = 1; i < num; i++) {
-    result += 4*i - 2;
-  }
-  return result;
+int leftP(int n) {
+  return 2*n*n - 4*n + 3;
 }
 
-int rightP(int num) {
-  int result = 1;
-  for (int i = 1; i < num; i++) {
-    result += 4*i + 2;
-  }
-  return result;
+int rightP(int n) {
+  return 2*n*n - 1;
 }
 
 int main () {
