@@ -20,8 +20,7 @@ void In() {
 
 int findAns() {
   for (int i = 1; i <= N+1; i++) {
-    if (tot[i] == 0)
-      tot[i] = tot[i-1];
+    tot[i] = max(tot[i], tot[i-1]);
     if (i + T[i] > N+1)
       continue;
     tot[i+T[i]] = max(tot[i+T[i]], tot[i] + P[i]);
