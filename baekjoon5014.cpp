@@ -25,7 +25,7 @@ int bfs() {
   queue<int> q;
   q.push(S);
   visit[S] = true;
-  counter[S] = 1;
+  counter[S] = 0;
   
   if (S == G)
     return 0;
@@ -43,7 +43,7 @@ int bfs() {
       q.push(tmp);
     }
     
-    tmp = cur + D;
+    tmp = cur - D;
     if (isInside(tmp) && !visit[tmp]) {
       visit[tmp] = true;
       counter[tmp] = counter[cur] + 1;
