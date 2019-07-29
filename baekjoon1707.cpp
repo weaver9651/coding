@@ -1,21 +1,27 @@
 #include <cstdio>
 #include <queue>
+#include <vector>
 
 using namespace std;
 
 int V, E;
-bool visit[20001] = {false, };
-bool used[20001][20001] = {false, };
 int color[20001] = {0, }; // 0 : none, 1 : black, -1 : red
-bool edge[20001][20001] = {false, };
+vector<int> edge[20001];
 
 void In() {
   scanf("%d%d", &V, &E);
   int y, x;
   for (int e = 0; e < E; e++) {
     scanf("%d%d", &y, &x);
-    edge[y][x] = true;
-    edge[x][y] = true;
+    edge[y].push_back(x);
+    edge[x].push_back(y);
+  }
+}
+
+void init() {
+  for (int i = 1; i <= V; i++) {
+    while(!edge[i].empty())
+      edge[i].pop_back();
   }
 }
 
@@ -29,26 +35,17 @@ bool bfs(int start) {
     cur = q.front();
     q.pop();
 
-    for (int i = 1; i <= V; i++) {
-      if (!used[cur][i] && edge[cur][i]) {
-	if (color[i]== 0) {
-	  color[i] = color[cur]*(-1);
-	  used[cur][i] = true;
-	  used[i][cur] = true;	  
-	  q.push(i);
-	}
-	else { // !(color[i] == 0)
-	  if (color[i] == color[cur]) {
-	    return false;
-	  }
-	  else { // (color[i] == color[cur])
-	    used[cur][i] = true;
-	    used[i][cur] = true;
-	    q.push(i);
-	  }
-	}
-      } // if (!used[cur][i] && edge[cur][i]) end
-    } // for end
+    for (auto i : edge[cur]) {
+      if (color[i] == 0) {
+	color[i] = color[cur] * (-1);
+	q.push(i);
+	continue;
+      }
+      else { // color[*i] != 0
+	if (color[cur] == color[i])
+	  return false;
+      }
+    }
   } // while(!q.empty()) end
   return true;
 }
@@ -59,8 +56,8 @@ int main () {
   for (int tc = 1; tc <= T; tc++) {
     In();
     printf("%s\n", bfs(1) ? "YES" : "NO");
+    init();
   }
-  
   
   return 0;
 }
