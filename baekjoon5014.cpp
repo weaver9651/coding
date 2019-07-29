@@ -1,24 +1,16 @@
 #include <cstdio>
 #include <queue>
-#include <algorithm>
 
 using namespace std;
 
 int F, S, G; // F : height, S : start, G : goal
 int U, D;
 
-bool visit[10000001] = {false, };
-int counter[10000001] = {0, };
+bool visit[1000001] = {false, };
+int counter[1000001] = {0, };
 
 void In() {
   scanf("%d%d%d%d%d", &F, &S, &G, &U, &D);
-}
-
-void init() {
-  bool tmp[10000001] = {false, };
-  int tmp2[10000001] = {0, };
-  copy(tmp, tmp+10000001, visit);
-  copy(tmp2, tmp2+10000001, counter);
 }
 
 bool isInside(int x) {
@@ -34,6 +26,9 @@ int bfs() {
   q.push(S);
   visit[S] = true;
   counter[S] = 1;
+  
+  if (S == G)
+    return 0;
 
   while(!q.empty()) {
     cur = q.front();
@@ -59,13 +54,13 @@ int bfs() {
 
   } // while end
   
-  return 0;
+  return -1;
 }
 
 int main () {
   In();
   int result = bfs();
-  if (result)
+  if (result != -1)
     printf("%d\n", result);
   else
     printf("use the stairs\n");
