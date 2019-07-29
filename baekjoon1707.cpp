@@ -20,6 +20,7 @@ void In() {
 
 void init() {
   for (int i = 1; i <= V; i++) {
+    color[i] = 0;
     while(!edge[i].empty())
       edge[i].pop_back();
   }
@@ -36,7 +37,7 @@ bool bfs(int start) {
     q.pop();
 
     for (auto i : edge[cur]) {
-      if (color[i] == 0) {
+      if (color[i] == 0) { // not colored
 	color[i] = color[cur] * (-1);
 	q.push(i);
       }
