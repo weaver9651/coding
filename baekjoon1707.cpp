@@ -39,9 +39,8 @@ bool bfs(int start) {
       if (color[i] == 0) {
 	color[i] = color[cur] * (-1);
 	q.push(i);
-	continue;
       }
-      else { // color[*i] != 0
+      else { // i is already colored
 	if (color[cur] == color[i])
 	  return false;
       }
@@ -50,12 +49,21 @@ bool bfs(int start) {
   return true;
 }
 
+bool bfsw() {
+  for (int i = 1; i <= V; i++) {
+    if (color[i] == 0)
+      if (!bfs(i))
+	return false;
+  }
+  return true;
+}
+
 int main () {
   int T;
   scanf("%d", &T);
   for (int tc = 1; tc <= T; tc++) {
     In();
-    printf("%s\n", bfs(1) ? "YES" : "NO");
+    printf("%s\n", bfsw() ? "YES" : "NO");
     init();
   }
   
