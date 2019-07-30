@@ -58,8 +58,8 @@ int findAns() {
 	  bfs(i, j, k);
 	  cnt++;
 	}
-      }
-    }
+      } // for j end
+    } // for i end
     init();
     if (cnt > maxx)
       maxx = cnt;
@@ -85,6 +85,8 @@ void In() {
 int main () {
   In();
   int result = findAns();
+  if (result == 0)
+    result = 1;
   printf("%d\n", result);
   
   return 0;
