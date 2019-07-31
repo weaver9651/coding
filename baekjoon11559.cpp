@@ -51,7 +51,7 @@ bool bfs(int start_y, int start_x) {
   queue<pair<int, int> > q;
   vector<pair<int, int> > del;
   q.push(make_pair(start_y, start_x));
-  visit[start_y][start_y] = true;
+  visit[start_y][start_x] = true;
   del.push_back(make_pair(start_y, start_x));
   int counter = 1;
 
