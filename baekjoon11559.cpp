@@ -105,7 +105,7 @@ int isBlock(int row, int column) {
     if (Map[i][column] != '.')
       return i;
   }
-  return false;
+  return -1;
 }
 
 void pullBlock(int block_y, int space_y, int x) {
@@ -117,10 +117,19 @@ void pullBlock(int block_y, int space_y, int x) {
 void gravity() {
   for (int j = 0; j < M; j++) {
     for (int i = N-1; i > 0; i--) {
-      if (Map[i][j] == '.' && isBlock(i, j)) {
+      if (Map[i][j] == '.' && isBlock(i, j) != -1) {
 	pullBlock(isBlock(i, j), i, j);
       }
     }
+  }
+}
+
+void Out() {
+  for (int i= 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+      printf("%c", Map[i][j]);
+    }
+    printf("\n");
   }
 }
 
