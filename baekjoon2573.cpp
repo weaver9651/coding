@@ -5,6 +5,7 @@ using namespace std;
 
 int N, M;
 int Map[300][300] = {0,};
+int meltMap[300][300] = {0, };
 int visit[300][300] = {false, };
 int dy[] = {0, 0, 1, -1};
 int dx[] = {1, -1, 0, 0};
@@ -38,16 +39,30 @@ int numOfSea(int y, int x) {
   return counter;
 }
 
+void initmeltMap() {
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+      meltMap[i][j] = 0;
+    }
+  }
+}
+
 void meltdown() {
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
       if (Map[i][j]) {
-	Map[i][j] -= numOfSea(i, j);
-	if (Map[i][j] < 0)
-	  Map[i][j] = 0;
+	meltMap[i][j] = numOfSea(i, j);
       }
     }
   }
+  for (int i = 0; i < N; i++) {
+    for (int j = 0; j < M; j++) {
+      Map[i][j] -= meltMap[i][j];
+      if (Map[i][j] < 0)
+	Map[i][j] = 0;
+    }
+  }
+  initmeltMap();
 }
 
 void init() {
@@ -98,6 +113,8 @@ int numOfIce() {
 int findAns() {
   int year = 0;
   int num;
+  if (numOfIce() >= 2)
+    return 0;
   while (true) {
     meltdown();
     num = numOfIce();
