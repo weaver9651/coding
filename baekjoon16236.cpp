@@ -14,7 +14,7 @@ int dist[20][20] = {0,};
 int shark_y, shark_x;
 int dy[] = {0, 0, 1, -1};
 int dx[] = {1, -1, 0, 0};
-bool visit[20][20] = {false, };
+// bool visit[20][20] = {false, };
 int level = 2;
 int exp = 0;
 int N;
@@ -42,7 +42,8 @@ void In() {
   }
 }
 
-void bfs(int start_y, int start_x) {
+bool bfs(int start_y, int start_x) {
+  bool visit[20][20] = {false, };
   int cur_y, cur_x;
   int tmp_y, tmp_x;
   queue<pair<int, int> > q;
@@ -83,7 +84,7 @@ void bfs(int start_y, int start_x) {
       }
       shark_y = tmp_y;
       shark_x = tmp_x;
-      return;
+      return true;
     }
 
     while (!buffer.empty()) {
@@ -110,15 +111,16 @@ void bfs(int start_y, int start_x) {
       }
     }
   } // while q buffer end
+  return false;
 }
 
-void init() {
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
-      visit[i][j] = false;
-    }
-  }
-}
+// void init() {
+//   for (int i = 0; i < N; i++) {
+//     for (int j = 0; j < N; j++) {
+//       visit[i][j] = false;
+//     }
+//   }
+// }
 
 bool isFood() {
   for (int i = 0; i < N; i++) {
@@ -141,10 +143,10 @@ void Out() {
 }
 
 int findAns() {
-  while(isFood()) {
-    bfs(shark_y, shark_x);
+  while(bfs(shark_y, shark_x)) {
+    //    bfs(shark_y, shark_x);
     //    Out();
-    init();
+    //    init();
   }
   return dist[shark_y][shark_x];
 }
