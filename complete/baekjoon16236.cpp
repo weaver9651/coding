@@ -6,7 +6,7 @@
 using namespace std;
 
 /*
-크기가 같으면 지나가기만 가능
+Codes causing timeout commented out.
 */
 
 int Map[20][20];
@@ -122,15 +122,15 @@ bool bfs(int start_y, int start_x) {
 //   }
 // }
 
-bool isFood() {
-  for (int i = 0; i < N; i++) {
-    for (int j = 0; j < N; j++) {
-      if (Map[i][j] < level && Map[i][j] > 0)
-	return true;
-    }
-  }
-  return false;
-}
+// bool isFood() {
+//   for (int i = 0; i < N; i++) {
+//     for (int j = 0; j < N; j++) {
+//       if (Map[i][j] < level && Map[i][j] > 0)
+// 	return true;
+//     }
+//   }
+//   return false;
+// }
 
 void Out() {
   for (int i = 0; i < N; i++) {
@@ -147,6 +147,7 @@ int findAns() {
     //    bfs(shark_y, shark_x);
     //    Out();
     //    init();
+    /* do nothing */;
   }
   return dist[shark_y][shark_x];
 }
