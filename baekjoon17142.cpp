@@ -35,11 +35,11 @@ void In() {
   }
 }
 
-bool isFull() {
+bool isFull(bool visit[50][50]) {
   int count = 0;
   for (int i = 0; i < N; i++)
     for (int j = 0; j < N; j++)
-      if (Map[i][j] == 0)
+      if (Map[i][j] == 0 && !visit[i][j])
 	count++;
   if (count == 0)
     return true;
@@ -48,13 +48,12 @@ bool isFull() {
 }
 
 int bfs(vector<pair<int,int> > s, vector<pair<int,int> > dead) {
-  if (isFull())
-    return 0;
   int cnt = 0;
-  //  int maxx = 0;
   int cur_y, cur_x;
   int tmp_y, tmp_x;
   bool visit[50][50] = {false,};
+  if (isFull(visit))
+    return 0;
   int dist[50][50] = {0,};
   queue<pair<int,int> > q;
   for (vector<pair<int,int> >::iterator it = s.begin();
@@ -86,8 +85,8 @@ int bfs(vector<pair<int,int> > s, vector<pair<int,int> > dead) {
 	if (Map[tmp_y][tmp_x] != 4)
 	  cnt++;
 	dist[tmp_y][tmp_x] = dist[cur_y][cur_x] + 1;
-	//	maxx = max(dist[tmp_y][tmp_x], maxx);
-	if (cnt == (N*N - cnt_wall - viruses.size() + M)) {
+	if (// cnt == (N*N - cnt_wall - viruses.size() + M
+	    isFull(visit)) {
 	  for (vector<pair<int,int> >::iterator it = dead.begin();
 	       it != dead.end(); it++) {
 	    Map[it->first][it->second] = 2;
