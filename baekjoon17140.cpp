@@ -134,7 +134,7 @@ void cal() {
 
 int findAns() {
   int counter = 0;
-  while(Map[R][C] != K) {
+  while( !(R <= max_row && C <= max_column && Map[R][C] == K) ) {
     counter++;
     if (counter > 100)
       return -1;
