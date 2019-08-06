@@ -13,10 +13,23 @@ void In() {
   for (int i = 1; i <= 3; i++) {
     for (int j = 1; j <= 3; j++) {
       scanf("%d", &Map[i][j]);
+      if (Map[i][j] != 0) {
+	max_column = max(max_column, i);
+	max_row = max(max_row, j);
+      }
     }
   }
-  max_column = 3;
-  max_row = 3;
+  
+}
+
+void Out() {
+  for (int i = 1; i <= max_row; i++) {
+    for (int j = 1; j <= max_column; j++) {
+      printf("%d ", Map[i][j]);
+    }
+    printf("\n");
+  }
+  printf("\n");
 }
 
 int numOfNum(int y, int x, char dir) {
