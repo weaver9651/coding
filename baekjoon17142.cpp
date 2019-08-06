@@ -52,8 +52,8 @@ int bfs(vector<pair<int,int> > s, vector<pair<int,int> > dead) {
   int cur_y, cur_x;
   int tmp_y, tmp_x;
   bool visit[50][50] = {false,};
-  if (isFull(visit))
-    return 0;
+  // if (isFull(visit))
+  //   return 0;
   int dist[50][50] = {0,};
   queue<pair<int,int> > q;
   for (vector<pair<int,int> >::iterator it = s.begin();
@@ -64,12 +64,12 @@ int bfs(vector<pair<int,int> > s, vector<pair<int,int> > dead) {
     cnt++;
     q.push(*it);
   }
-  for (vector<pair<int,int> >::iterator it = dead.begin();
-       it != dead.end(); it++) {
-    tmp_y = it->first;
-    tmp_x = it->second;
-    Map[tmp_y][tmp_x] = 4;
-  }
+  // for (vector<pair<int,int> >::iterator it = dead.begin();
+  //      it != dead.end(); it++) {
+  //   tmp_y = it->first;
+  //   tmp_x = it->second;
+  //   Map[tmp_y][tmp_x] = 4;
+  // }
 
   while (!q.empty()) {
     cur_y = q.front().first;
@@ -82,26 +82,34 @@ int bfs(vector<pair<int,int> > s, vector<pair<int,int> > dead) {
       if (isInside(tmp_y, tmp_x) && !visit[tmp_y][tmp_x] && Map[tmp_y][tmp_x] != 1) {
 	q.push(make_pair(tmp_y, tmp_x));
 	visit[tmp_y][tmp_x] = true;
-	if (Map[tmp_y][tmp_x] != 4)
-	  cnt++;
+	// if (Map[tmp_y][tmp_x] != 4)
+	//   cnt++;
 	dist[tmp_y][tmp_x] = dist[cur_y][cur_x] + 1;
-	if (// cnt == (N*N - cnt_wall - viruses.size() + M
-	    isFull(visit)) {
-	  for (vector<pair<int,int> >::iterator it = dead.begin();
-	       it != dead.end(); it++) {
-	    Map[it->first][it->second] = 2;
-	  }
-	  return dist[tmp_y][tmp_x];
-	}
+	// if (cnt == (N*N - cnt_wall - viruses.size() + M)) {
+	//   for (vector<pair<int,int> >::iterator it = dead.begin();
+	//        it != dead.end(); it++) {
+	//     Map[it->first][it->second] = 2;
+	//   }
+	//   return dist[tmp_y][tmp_x];
+	// }
       }
     }
   }
 
-  for (vector<pair<int,int> >::iterator it = dead.begin();
-       it != dead.end(); it++) {
-    Map[it->first][it->second] = 2;
-  }  
-  return -1;
+  // for (vector<pair<int,int> >::iterator it = dead.begin();
+  //      it != dead.end(); it++) {
+  //   Map[it->first][it->second] = 2;
+  // }
+  if (isFull(visit)) {
+    int maxx = 0;
+    for (int i = 0; i < N; i++)
+      for (int j = 0; j < N; j++)
+	if (Map[i][j] != 2)
+	  maxx = max(maxx, dist[i][j]);
+    return maxx;
+  }
+  else
+    return -1;
 }
 
 int findAns() {
