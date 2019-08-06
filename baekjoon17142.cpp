@@ -40,11 +40,8 @@ bool isFull(bool visit[50][50]) {
   for (int i = 0; i < N; i++)
     for (int j = 0; j < N; j++)
       if (Map[i][j] == 0 && !visit[i][j])
-	count++;
-  if (count == 0)
-    return true;
-  else
-    return false;
+	return false;
+  return true;
 }
 
 int bfs(vector<pair<int,int> > s) {
@@ -91,7 +88,7 @@ int bfs(vector<pair<int,int> > s) {
 }
 
 int findAns() {
-  int minn = 2500;
+  int minn = 10000;
   // combination
   vector<int> comb;
   for (int i = 0; i < viruses.size() - M; i++) {
@@ -103,19 +100,16 @@ int findAns() {
   
   do {
     vector<pair<int,int> > s;
-    vector<pair<int,int> > dead;
     for (int i = 0; i < viruses.size(); i++) {
       if (comb[i] == 1)
 	s.push_back(make_pair(viruses[i].first, viruses[i].second));
-      else
-	dead.push_back(make_pair(viruses[i].first, viruses[i].second));
     }
     int cur_result = bfs(s);
     if (cur_result != -1)
       minn = min(minn, cur_result);
   } while (next_permutation(comb.begin(), comb.end()));
   
-  if (minn == 2500)
+  if (minn == 10000)
     return -1;
   else
     return minn;
