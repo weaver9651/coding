@@ -47,29 +47,20 @@ bool isFull(bool visit[50][50]) {
     return false;
 }
 
-int bfs(vector<pair<int,int> > s, vector<pair<int,int> > dead) {
-  int cnt = 0;
+int bfs(vector<pair<int,int> > s) {
   int cur_y, cur_x;
   int tmp_y, tmp_x;
   bool visit[50][50] = {false,};
-  // if (isFull(visit))
-  //   return 0;
   int dist[50][50] = {0,};
   queue<pair<int,int> > q;
+  
   for (vector<pair<int,int> >::iterator it = s.begin();
        it != s.end(); it++) {
     tmp_y = it->first;
     tmp_x = it->second;
     visit[tmp_y][tmp_x] = true;
-    cnt++;
     q.push(*it);
   }
-  // for (vector<pair<int,int> >::iterator it = dead.begin();
-  //      it != dead.end(); it++) {
-  //   tmp_y = it->first;
-  //   tmp_x = it->second;
-  //   Map[tmp_y][tmp_x] = 4;
-  // }
 
   while (!q.empty()) {
     cur_y = q.front().first;
@@ -82,24 +73,11 @@ int bfs(vector<pair<int,int> > s, vector<pair<int,int> > dead) {
       if (isInside(tmp_y, tmp_x) && !visit[tmp_y][tmp_x] && Map[tmp_y][tmp_x] != 1) {
 	q.push(make_pair(tmp_y, tmp_x));
 	visit[tmp_y][tmp_x] = true;
-	// if (Map[tmp_y][tmp_x] != 4)
-	//   cnt++;
 	dist[tmp_y][tmp_x] = dist[cur_y][cur_x] + 1;
-	// if (cnt == (N*N - cnt_wall - viruses.size() + M)) {
-	//   for (vector<pair<int,int> >::iterator it = dead.begin();
-	//        it != dead.end(); it++) {
-	//     Map[it->first][it->second] = 2;
-	//   }
-	//   return dist[tmp_y][tmp_x];
-	// }
       }
     }
   }
 
-  // for (vector<pair<int,int> >::iterator it = dead.begin();
-  //      it != dead.end(); it++) {
-  //   Map[it->first][it->second] = 2;
-  // }
   if (isFull(visit)) {
     int maxx = 0;
     for (int i = 0; i < N; i++)
@@ -113,7 +91,7 @@ int bfs(vector<pair<int,int> > s, vector<pair<int,int> > dead) {
 }
 
 int findAns() {
-  int minn = 1000;
+  int minn = 2500;
   // combination
   vector<int> comb;
   for (int i = 0; i < viruses.size() - M; i++) {
@@ -132,12 +110,12 @@ int findAns() {
       else
 	dead.push_back(make_pair(viruses[i].first, viruses[i].second));
     }
-    int cur_result = bfs(s, dead);
+    int cur_result = bfs(s);
     if (cur_result != -1)
       minn = min(minn, cur_result);
   } while (next_permutation(comb.begin(), comb.end()));
   
-  if (minn == 1000)
+  if (minn == 2500)
     return -1;
   else
     return minn;
