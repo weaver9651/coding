@@ -14,8 +14,8 @@ void In() {
     for (int j = 1; j <= 3; j++) {
       scanf("%d", &Map[i][j]);
       if (Map[i][j] != 0) {
-	max_column = max(max_column, i);
-	max_row = max(max_row, j);
+	max_column = max(max_column, j);
+	max_row = max(max_row, i);
       }
     }
   }
@@ -129,6 +129,7 @@ void cal() {
   else {
     calC();
   }
+  //  Out();
 }
 
 int findAns() {
