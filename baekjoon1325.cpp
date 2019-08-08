@@ -7,7 +7,7 @@ using namespace std;
 
 int N, M;
 vector<pair<int,int> > results; // node, count
-vector<int> edges[10001];
+vector<int> edges[100001];
 
 
 bool sortbysec(const pair<int,int> &a, const pair<int,int> &b) {
