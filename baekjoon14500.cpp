@@ -6,7 +6,7 @@ using namespace std;
 int N, M;
 int Map[500][500];
 
-void In () {
+void In() {
   scanf("%d%d", &N, &M);
   for (int i = 0; i < N; i++)
     for (int j = 0; j < M; j++)
@@ -142,7 +142,7 @@ int findMaxB5() {
   int tmp_y, tmp_x;
   for (int i = 0; i < N; i++) {
     for (int j = 0; j < M; j++) {
-      for (int d = 0; d < 2; d++) {
+      for (int d = 0; d < 4; d++) {
 	int cur_value = 0;
 	for (int k = 0; k < 4; k++) {
 	  tmp_y = i + dy[d][k];
