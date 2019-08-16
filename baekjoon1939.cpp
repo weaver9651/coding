@@ -33,10 +33,8 @@ long long bfs() {
   vector<int> results;
   int cur, tmp;
   long long cur_weight, tmp_weight;
-  bool visit[100001] = {false, };
   queue<truck> q;
   q.push(truck(src, MAX_WEIGHT));
-  visit[src] = true;
 
   while (!q.empty()) {
     cur = q.front().cur;
@@ -46,14 +44,13 @@ long long bfs() {
     for (auto next : edges[cur]) {
       tmp = next.first;
       tmp_weight = next.second;
-      if (!visit[tmp] || tmp == dst) {
-	visit[tmp] = true;
-	tmp_weight = min(cur_weight, tmp_weight);
-	q.push(truck(tmp, tmp_weight));
-	if (tmp == dst)
-	  results.push_back(tmp_weight);
-      }
+      tmp_weight = min(cur_weight, tmp_weight);
+      q.push(truck(tmp, tmp_weight));
+      if (tmp == dst)
+	results.push_back(tmp_weight);
     }
+    while(!edges[cur].empty())
+      edges[cur].pop_back();
   }
   int maxx = 0;
   for (auto num : results)
