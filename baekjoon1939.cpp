@@ -46,7 +46,7 @@ long long bfs() {
     for (auto next : edges[cur]) {
       tmp = next.first;
       tmp_weight = next.second;
-      if (!visit[tmp]) {
+      if (!visit[tmp] || tmp == dst) {
 	visit[tmp] = true;
 	tmp_weight = min(cur_weight, tmp_weight);
 	q.push(truck(tmp, tmp_weight));
