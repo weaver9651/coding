@@ -55,10 +55,10 @@ long long bfs() {
       }
     }
   }
-  int minn = MAX_WEIGHT;
+  int maxx = 0;
   for (auto num : results)
-    minn  = min(minn, num);
-  return minn;
+    maxx = max(maxx, num);
+  return maxx;
 }
 
 int main () {
