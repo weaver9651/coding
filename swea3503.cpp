@@ -37,10 +37,15 @@ int findAns(vector<int> arr) {
 }
 
 int main () {
-  vector<int> arr;
-  In(arr);
-  int result = findAns(arr);
-  printf("%d\n", result);
+  int T;
+  scanf("%d", &T);
+
+  for (int tc = 1; tc <= T; tc++) {
+    vector<int> arr;
+    In(arr);
+    int result = findAns(arr);
+    printf("#%d %d\n", tc, result);
+  }
   
   return 0;
 }
