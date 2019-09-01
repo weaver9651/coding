@@ -123,14 +123,36 @@ void findIce(short start_y, short start_x, vector<vector<bool> > &visit) {
   }
 }
 
-void candIce() {
-  vector<bool> tmpVisit(C, false);
-  vector<vector<bool> > visit(R, tmpVisit);
+// void candIce() {
+//   vector<bool> tmpVisit(C, false);
+//   vector<vector<bool> > visit(R, tmpVisit);
   
-  for (short i = 0; i < R; i++) {
-    for (short j = 0; j < C; j++) {
-      if (!visit[i][j] && Map[i][j] == '.')
-	findIce(i, j, visit);
+//   for (short i = 0; i < R; i++) {
+//     for (short j = 0; j < C; j++) {
+//       if (!visit[i][j] && Map[i][j] == '.')
+// 	findIce(i, j, visit);
+//     }
+//   }
+// }
+
+bool nearWater(int y, int x) {
+  bool flag = false;
+  int tmp_y, tmp_x;
+  for (int i = 0; i < 4; i++) {
+    tmp_y = y+dy[i];
+    tmp_x = x+dx[i];
+    if (isInside(tmp_y, tmp_x) && Map[tmp_y][tmp_x] == '.')
+      flag = true;
+  }
+  return flag;
+}
+
+void candIce() {
+  for (int i = 0; i < R; i++) {
+    for (int j = 0; j < C; j++) {
+      if (Map[i][j] == 'X' && nearWater(i, j)) {
+	remove_cands.push(make_pair(i, j));
+      }
     }
   }
 }
