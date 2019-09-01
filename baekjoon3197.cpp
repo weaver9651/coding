@@ -6,13 +6,13 @@ using namespace std;
 
 int R, C;
 char Map[1500][1500];
-vector<pair<int,int> > swans;
-queue<pair<int,int> > remove_cands;
-int src_y, src_x, dst_y, dst_x;
-int dy[] = {0, 0, 1, -1};
-int dx[] = {1, -1, 0, 0};
+vector<pair<short,short> > swans;
+queue<pair<short, short> > remove_cands;
+short src_y, src_x, dst_y, dst_x;
+short dy[] = {0, 0, 1, -1};
+short dx[] = {1, -1, 0, 0};
 
-bool isInside(int y, int x) {
+bool isInside(short y, short x) {
   if (y >= 0 && y < R && x >= 0 && x < C)
     return true;
   else
@@ -23,8 +23,8 @@ void In() {
   char tmp;
   scanf("%d%d", &R, &C);
   scanf("%c", &tmp); // remove newline
-  for (int i = 0; i < R; i++) {
-    for (int j = 0;j < C; j++) {
+  for (short i = 0; i < R; i++) {
+    for (short j = 0; j < C; j++) {
       scanf("%c", &tmp);
       Map[i][j] = tmp;
       if (tmp == 'L') {
@@ -41,8 +41,8 @@ void In() {
 }
 
 void Out() {
-  for (int i = 0; i < R; i++) {
-    for (int j = 0; j < C; j++) {
+  for (short i = 0; i < R; i++) {
+    for (short j = 0; j < C; j++) {
       printf("%c", Map[i][j]);
     }
     printf("\n");
@@ -51,8 +51,8 @@ void Out() {
 }
 
 bool bfs() {
-  int cur_y, cur_x , tmp_y, tmp_x;
-  queue<pair<int,int> > q;
+  short cur_y, cur_x , tmp_y, tmp_x;
+  queue<pair<short,short> > q;
   vector<bool> tmpVisit(C, false);
   vector<vector<bool> > visit(R, tmpVisit);
 
@@ -64,7 +64,7 @@ bool bfs() {
     cur_x = q.front().second;
     q.pop();
 
-    for (int i = 0; i < 4; i++) {
+    for (short i = 0; i < 4; i++) {
       tmp_y = cur_y + dy[i];
       tmp_x = cur_x + dx[i];
       if (isInside(tmp_y, tmp_x) && !visit[tmp_y][tmp_x] && Map[tmp_y][tmp_x] == '.') {
@@ -79,14 +79,14 @@ bool bfs() {
 }
 
 void removeIce() {
-  int y, x, tmp_y, tmp_x;
-  int size = remove_cands.size();
-  for (int k = 0; k < size; k++) {
+  short y, x, tmp_y, tmp_x;
+  short size = remove_cands.size();
+  for (short k = 0; k < size; k++) {
     y = remove_cands.front().first;
     x = remove_cands.front().second;
     remove_cands.pop();
     Map[y][x] = '.';
-    for (int i = 0; i < 4; i++) {
+    for (short i = 0; i < 4; i++) {
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
       if (isInside(tmp_y, tmp_x) && Map[tmp_y][tmp_x] == 'X')
@@ -95,9 +95,9 @@ void removeIce() {
   }
 }
 
-void findIce(int start_y, int start_x, vector<vector<bool> > &visit) {
-  int cur_y, cur_x, tmp_y, tmp_x;
-  queue<pair<int,int> > q;
+void findIce(short start_y, short start_x, vector<vector<bool> > &visit) {
+  short cur_y, cur_x, tmp_y, tmp_x;
+  queue<pair<short,short> > q;
   q.push(make_pair(start_y, start_x));
   visit[start_y][start_x] = true;
 
@@ -106,7 +106,7 @@ void findIce(int start_y, int start_x, vector<vector<bool> > &visit) {
     cur_x = q.front().second;
     q.pop();
 
-    for (int i = 0; i < 4; i++) {
+    for (short i = 0; i < 4; i++) {
       tmp_y = cur_y + dy[i];
       tmp_x = cur_x + dx[i];
       if (isInside(tmp_y, tmp_x) && !visit[tmp_y][tmp_x]) {
@@ -127,8 +127,8 @@ void candIce() {
   vector<bool> tmpVisit(C, false);
   vector<vector<bool> > visit(R, tmpVisit);
   
-  for (int i = 0; i < R; i++) {
-    for (int j = 0; j < C; j++) {
+  for (short i = 0; i < R; i++) {
+    for (short j = 0; j < C; j++) {
       if (!visit[i][j] && Map[i][j] == '.')
 	findIce(i, j, visit);
     }
@@ -151,7 +151,7 @@ int findAns() {
 int main () {
   In();
   //  Out();
-  int result = findAns();
+  short result = findAns();
   printf("%d\n", result);
 
   return 0;
