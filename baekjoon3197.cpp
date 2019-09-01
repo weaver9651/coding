@@ -7,7 +7,7 @@ using namespace std;
 int R, C;
 char Map[1500][1500];
 vector<pair<int,int> > swans;
-vector<pair<int,int> > remove_cands;
+queue<pair<int,int> > remove_cands;
 int src_y, src_x, dst_y, dst_x;
 int dy[] = {0, 0, 1, -1};
 int dx[] = {1, -1, 0, 0};
@@ -79,23 +79,19 @@ bool bfs() {
 }
 
 void removeIce() {
-  vector<pair<int,int> > buffer;
   int y, x, tmp_y, tmp_x;
-  while (!remove_cands.empty()) {
-    y = remove_cands.back().first;
-    x = remove_cands.back().second;
-    remove_cands.pop_back();
+  int size = remove_cands.size();
+  for (int k = 0; k < size; k++) {
+    y = remove_cands.front().first;
+    x = remove_cands.front().second;
+    remove_cands.pop();
     Map[y][x] = '.';
     for (int i = 0; i < 4; i++) {
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
       if (isInside(tmp_y, tmp_x) && Map[tmp_y][tmp_x] == 'X')
-	buffer.push_back(make_pair(tmp_y, tmp_x));
+	remove_cands.push(make_pair(tmp_y, tmp_x));
     }
-  }
-  while (!buffer.empty()) {
-    remove_cands.push_back(buffer.back());
-    buffer.pop_back();
   }
 }
 
@@ -120,7 +116,7 @@ void findIce(int start_y, int start_x, vector<vector<bool> > &visit) {
 	}
 	else { // Map[tmp_y][tmp_x] == 'X'
 	  visit[tmp_y][tmp_x] = true;
-	  remove_cands.push_back(make_pair(tmp_y, tmp_x));
+	  remove_cands.push(make_pair(tmp_y, tmp_x));
 	}
       }
     } // end for 
