@@ -79,12 +79,23 @@ bool bfs() {
 }
 
 void removeIce() {
-  int y, x;
+  vector<pair<int,int> > buffer;
+  int y, x, tmp_y, tmp_x;
   while (!remove_cands.empty()) {
     y = remove_cands.back().first;
     x = remove_cands.back().second;
     remove_cands.pop_back();
     Map[y][x] = '.';
+    for (int i = 0; i < 4; i++) {
+      tmp_y = y + dy[i];
+      tmp_x = x + dx[i];
+      if (isInside(tmp_y, tmp_x) && Map[tmp_y][tmp_x] == 'X')
+	buffer.push_back(make_pair(tmp_y, tmp_x));
+    }
+  }
+  while (!buffer.empty()) {
+    remove_cands.push_back(buffer.back());
+    buffer.pop_back();
   }
 }
 
@@ -130,9 +141,10 @@ void candIce() {
 
 int findAns() {
   int counter = 0;
+  candIce();
+
   while (!bfs()) {
     counter++;
-    candIce();
     removeIce();
     //    Out();
   }
