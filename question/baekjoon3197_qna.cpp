@@ -191,16 +191,21 @@ void Out() {
 bool moveSwan() {
   int y, x;
   int tmp_y, tmp_x;
+  vector<bool> visitTmp(C, false);
+  vector<vector<bool> > visit(R, visitTmp);
+
   while (!swan1_cands.empty()) {
     y = swan1_cands.back().first;
     x = swan1_cands.back().second;
     swan1_cands.pop_back();
+    visit[y][x] = true;
 
     Map[y][x] = 'L';
     for (int i = 0; i < 4; i++) { // right, left, up, down
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
-      if (isInside(tmp_y, tmp_x)) {
+      if (isInside(tmp_y, tmp_x) && !visit[tmp_y][tmp_x]) {
+	visit[tmp_y][tmp_x] = true;
 	if (Map[tmp_y][tmp_x] == 'R')
 	  return true;
 	if (Map[tmp_y][tmp_x] == '.')
