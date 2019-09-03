@@ -103,6 +103,7 @@ bool spreadSwan(int y, int x, char xxx) {
       }
       else if (isInside(tmp_y, tmp_x) && Map[tmp_y][tmp_x] == 'X' &&
 	       !visit[tmp_y][tmp_x]) {
+	visit[tmp_y][tmp_x] = true;
 	if (xxx == 'L')
 	  swan1_cands.push_back(make_pair(tmp_y, tmp_x));
 	else
