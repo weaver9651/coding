@@ -95,7 +95,7 @@ bool spreadSwan(int y, int x, char xxx) {
 	  !visit[tmp_y][tmp_x]) {
 	visit[tmp_y][tmp_x] = true;
         if ((xxx == 'L' && Map[tmp_y][tmp_x] == 'R') ||
-	    (xxx == 'R' && Map[tmp_y][tmp_x] == 'L')) flag = true;
+	    (xxx == 'R' && Map[tmp_y][tmp_x] == 'L')) return true;
 	if (Map[tmp_y][tmp_x] != xxx) {
 	  q.push(make_pair(tmp_y, tmp_x));
 	  Map[tmp_y][tmp_x] = xxx;
@@ -111,7 +111,7 @@ bool spreadSwan(int y, int x, char xxx) {
       }
     }
   }
-  return flag;
+  return false;
 }
 
 void bfsIce(int y, int x, vector<vector<bool> > &visit) {
@@ -157,17 +157,22 @@ void findIce() {
 void removeIce() {
   int y, x, tmp_y, tmp_x;
   vector<pair<int,int> > buffer;
+  vector<bool> visitTmp(C, false);
+  vector<vector<bool> > visit(R, visitTmp);
+
   while (!remove_cands.empty()) {
     y = remove_cands.back().first;
     x = remove_cands.back().second;
     remove_cands.pop_back();
+    visit[y][x] = true;
 
     Map[y][x] = '.';
     for (int i = 0; i < 4; i++) {
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
-      if (isInside(tmp_y, tmp_x) && Map[tmp_y][tmp_x] == 'X') {
+      if (isInside(tmp_y, tmp_x) && Map[tmp_y][tmp_x] == 'X' && !visit[tmp_y][tmp_x]) {
 	buffer.push_back(make_pair(tmp_y, tmp_x));
+	visit[tmp_y][tmp_x] = true;
       }
     }
   }
@@ -199,8 +204,8 @@ bool moveSwan() {
     x = swan1_cands.back().second;
     swan1_cands.pop_back();
     visit1[y][x] = true;
-
     Map[y][x] = 'L';
+    
     for (int i = 0; i < 4; i++) { // right, left, up, down
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
@@ -228,8 +233,8 @@ bool moveSwan() {
     x = swan2_cands.back().second;
     swan2_cands.pop_back();
     visit2[y][x] = true;
-
     Map[y][x] = 'R';
+    
     for (int i = 0; i < 4; i++) {
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
