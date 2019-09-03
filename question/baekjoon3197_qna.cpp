@@ -192,20 +192,20 @@ bool moveSwan() {
   int y, x;
   int tmp_y, tmp_x;
   vector<bool> visitTmp(C, false);
-  vector<vector<bool> > visit(R, visitTmp);
+  vector<vector<bool> > visit1(R, visitTmp);
 
   while (!swan1_cands.empty()) {
     y = swan1_cands.back().first;
     x = swan1_cands.back().second;
     swan1_cands.pop_back();
-    visit[y][x] = true;
+    visit1[y][x] = true;
 
     Map[y][x] = 'L';
     for (int i = 0; i < 4; i++) { // right, left, up, down
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
-      if (isInside(tmp_y, tmp_x) && !visit[tmp_y][tmp_x]) {
-	visit[tmp_y][tmp_x] = true;
+      if (isInside(tmp_y, tmp_x) && !visit1[tmp_y][tmp_x]) {
+	visit1[tmp_y][tmp_x] = true;
 	if (Map[tmp_y][tmp_x] == 'R')
 	  return true;
 	if (Map[tmp_y][tmp_x] == '.')
@@ -220,16 +220,21 @@ bool moveSwan() {
     swan1_buffer.pop_back();
   }
 
+
+  vector<vector<bool> > visit2(R, visitTmp);
+  
   while (!swan2_cands.empty()) {
     y = swan2_cands.back().first;
     x = swan2_cands.back().second;
     swan2_cands.pop_back();
+    visit2[y][x] = true;
 
     Map[y][x] = 'R';
     for (int i = 0; i < 4; i++) {
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
       if (isInside(tmp_y, tmp_x)) {
+	visit2[tmp_y][tmp_x] = true;
 	if (Map[tmp_y][tmp_x] == 'L')
 	  return true;
 	if (Map[tmp_y][tmp_x] == '.')
