@@ -93,10 +93,10 @@ bool spreadSwan(int y, int x, char xxx) {
       tmp_x = cur_x + dx[i];
       if (isInside(tmp_y, tmp_x) && Map[tmp_y][tmp_x] != 'X' &&
 	  !visit[tmp_y][tmp_x]) {
+	visit[tmp_y][tmp_x] = true;
         if ((xxx == 'L' && Map[tmp_y][tmp_x] == 'R') ||
 	    (xxx == 'R' && Map[tmp_y][tmp_x] == 'L')) flag = true;
 	if (Map[tmp_y][tmp_x] != xxx) {
-	  visit[tmp_y][tmp_x] = true;
 	  q.push(make_pair(tmp_y, tmp_x));
 	  Map[tmp_y][tmp_x] = xxx;
 	}
