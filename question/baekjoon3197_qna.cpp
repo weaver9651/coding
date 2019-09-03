@@ -238,7 +238,7 @@ bool moveSwan() {
     for (int i = 0; i < 4; i++) {
       tmp_y = y + dy[i];
       tmp_x = x + dx[i];
-      if (isInside(tmp_y, tmp_x)) {
+      if (isInside(tmp_y, tmp_x) && !visit2[tmp_y][tmp_x]) {
 	visit2[tmp_y][tmp_x] = true;
 	if (Map[tmp_y][tmp_x] == 'L')
 	  return true;
