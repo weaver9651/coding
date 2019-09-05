@@ -38,6 +38,8 @@ int bfs() {
   q.push(Person(1, 1));
   visit[1][1][0] = true;
   dist[1][1] = 1;
+  if (N == 1 && M == 1)
+    return 1;
 
   while(!q.empty()) {
     cur_y = q.front().y;
