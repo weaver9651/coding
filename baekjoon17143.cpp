@@ -33,10 +33,12 @@ void In() {
     scanf("%d%d%d%d%d", &y, &x, &s, &d, &z);
     d %= 4;
     if (d == 1 || d == 2) {
-      s %= (R-1)*2;
+      if (R != 1)
+	s %= (R-1)*2;
     }
     else {
-      s %= (C-1)*2;
+      if (C != 1)
+	s %= (C-1)*2;
     }
     Fish fish = Fish(y, x, s, d, z);
     Map[y][x].push_back(fish);
