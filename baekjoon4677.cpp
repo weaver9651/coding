@@ -74,10 +74,10 @@ void Out() {
 }
 
 int main () {
-  M = 1;
-  N = 1;
-  while (M != 0) {
+  while (true) {
     In();
+    if (M == 0)
+      break;
     int result = findAns();
     printf("%d\n", result);
   }
