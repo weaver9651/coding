@@ -74,9 +74,13 @@ void Out() {
 }
 
 int main () {
-  In();
-  int result = findAns();
-  printf("%d\n", result);
+  M = 1;
+  N = 1;
+  while (M != 0) {
+    In();
+    int result = findAns();
+    printf("%d\n", result);
+  }
   
   return 0;
 }
