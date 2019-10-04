@@ -65,9 +65,9 @@ int bfs() {
 	tmp_dist = 0;
       else
 	tmp_dist = (cur_d == i ? 0 : 1);
-      if (dist[tmp_y][tmp_x] > dist[cur_y][cur_x] + tmp_dist &&
-	  Map[tmp_y][tmp_x] != '*' &&
-	  isInside(tmp_y, tmp_x)) {
+      if (isInside(tmp_y, tmp_x) &&
+	  dist[tmp_y][tmp_x] > dist[cur_y][cur_x] + tmp_dist &&
+	  Map[tmp_y][tmp_x] != '*') {
 	dist[tmp_y][tmp_x] = dist[cur_y][cur_x] + tmp_dist;
 	q.push(make_tri(tmp_y, tmp_x, i));
 	if (tmp_y == cs.back().first && tmp_x == cs.back().second)
