@@ -3,8 +3,8 @@ using namespace std;
 
 typedef pair<pair<int,int>,int> tri;
 
-char Map[101][101];
-int dist[101][101];
+char Map[102][102];
+int dist[102][102];
 int W, H;
 vector<pair<int,int> > cs;
 int dy[] = {-1, 0, 1, 0}; // 0: up, 1: right, 2: down, 3: left
@@ -18,12 +18,12 @@ void In() {
   scanf("%d%d", &W, &H);
   char tmp;
   scanf("%c", &tmp); // remove newline
-  for (int i = 0; i < H; i++) {
-    for (int j = 0; j < W; j++) {
+  for (int i = 1; i <= H; i++) {
+    for (int j = 1; j <= W; j++) {
       scanf("%c", &tmp);
       Map[i][j] = tmp;
       dist[i][j] = 200;
-      if (tmp == 'c')
+      if (tmp == 'C')
 	cs.push_back(make_pair(i, j));
     }
     scanf("%c", &tmp); // remove newline
@@ -31,7 +31,7 @@ void In() {
 }
 
 bool isInside(int y, int x) {
-  if (y >= 0 && y < H && x >= 0 && x < W)
+  if (y > 0 && y <= H && x > 0 && x <= W)
     return true;
   else
     return false;
