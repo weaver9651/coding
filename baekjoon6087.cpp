@@ -30,12 +30,6 @@ void In() {
   }
 }
 
-struct cmp {
-  bool operator()(const tri &a, const tri &b) {
-    return a.second < b.second;
-  }
-};
-
 bool isInside(int y, int x) {
   if (y >= 0 && y < H && x >= 0 && x < W)
     return true;
@@ -45,7 +39,7 @@ bool isInside(int y, int x) {
 
 int bfs() {
   int cur_y, cur_x, cur_d, tmp_y, tmp_x, tmp_dist;
-  priority_queue<tri, vector<tri>, cmp> q;
+  queue<tri> q;
   cur_y = cs.front().first;
   cur_x = cs.front().second;
   
@@ -53,9 +47,9 @@ int bfs() {
   dist[cur_y][cur_x] = 0;
 
   while (!q.empty()) {
-    cur_y = q.top().first.first;
-    cur_x = q.top().first.second;
-    cur_d = q.top().second;
+    cur_y = q.front().first.first;
+    cur_x = q.front().first.second;
+    cur_d = q.front().second;
     q.pop();
 
     for (int i = 0; i < 4; i++) {
