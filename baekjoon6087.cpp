@@ -22,8 +22,8 @@ void In() {
     for (int j = 1; j <= W; j++) {
       scanf("%c", &tmp);
       Map[i][j] = tmp;
-      dist[i][j] = 200;
-      if (tmp == 'C')
+      dist[i][j] = 10000;
+      if (tmp == 'C' || tmp == 'c')
 	cs.push_back(make_pair(i, j));
     }
     scanf("%c", &tmp); // remove newline
@@ -46,7 +46,9 @@ int bfs() {
   q.push(make_tri(cur_y, cur_x, -1));
   dist[cur_y][cur_x] = 0;
 
+  int counter = 0;
   while (!q.empty()) {
+    counter++;
     cur_y = q.front().first.first;
     cur_x = q.front().first.second;
     cur_d = q.front().second;
