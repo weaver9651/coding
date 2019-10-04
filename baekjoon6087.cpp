@@ -23,7 +23,7 @@ void In() {
       scanf("%c", &tmp);
       Map[i][j] = tmp;
       dist[i][j] = 200;
-      if (tmp == 'C')
+      if (tmp == 'c')
 	cs.push_back(make_pair(i, j));
     }
     scanf("%c", &tmp); // remove newline
