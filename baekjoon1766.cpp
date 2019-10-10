@@ -27,18 +27,18 @@ void In() {
 }
 
 void findAns() {
-  queue<int> q;
+  priority_queue<int, vector<int>, greater<int>> pq;
   vector<bool> visit(N+1, false);
   for (int i = 1; i <= N; i++) {
     if (indegree[i] == 0)
-      q.push(i);
+      pq.push(i);
     visit[i] = true;
   }
 
   int cur;
-  while(!q.empty()) {
-    cur = q.front();
-    q.pop();
+  while(!pq.empty()) {
+    cur = pq.top();
+    pq.pop();
     ans.push_back(cur);
 
     int target;
@@ -47,14 +47,14 @@ void findAns() {
       target = *it;
       indegree[target]--;
       if (indegree[target] == 0) {
-	q.push(target);
+	pq.push(target);
 	visit[target] = true;
       }
     }
   }
 
-  for (int i = 0; i < N; i++) {
-    printf("%d ", ans[i]);
+  for (auto x : ans) {
+    printf("%d ", x);
   }
   printf("\n");
 }
