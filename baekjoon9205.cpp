@@ -21,7 +21,7 @@ bool bfs(vector<pii> &cvs) {
   int cur, tmp;
   int cur_y, cur_x, tmp_y, tmp_x;
   cur = 0;
-  vector<bool> visit(N, false);
+  vector<bool> visit(N+2, false);
   queue<int> q;
   q.push(cur);
   visit[cur] = true;
