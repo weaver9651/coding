@@ -65,7 +65,6 @@ int main () {
  
   sort(results.begin(), results.end(), sortbysec);
 
-
   vector<int> cands;
   int maxx = results.front().second;
   for (vector<pair<int,int> >::iterator it = results.begin();
