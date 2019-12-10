@@ -85,6 +85,7 @@ int findAns() {
     else {
       result += dist[cell.first][cell.second];
       counter++;
+      Map[cell.first][cell.second] = '.';
       abs_y = cell.first;
       abs_x = cell.second;
     }
