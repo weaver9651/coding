@@ -1,3 +1,6 @@
 ## Ignore File ##
 *~
 a.out
+
+# ignore MAC OS gud-gdb
+a.out.dSYM*
