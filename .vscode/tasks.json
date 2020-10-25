@@ -33,7 +33,7 @@
             "label": "C++ build for clang++",
             "command": "clang++",
             "args": [
-                //"-std=c++11",
+                "-std=c++11",
                 "-g",
                 "${file}",
                 "-o",
@@ -65,7 +65,7 @@
             "label": "C/C++: clang++ build active file",
             "command": "/usr/bin/clang++",
             "args": [
-                //"-std=c++11",
+                "-std=c++11",
                 "-g",
                 "${file}",
                 "-o",
@@ -82,15 +82,40 @@
                 "isDefault": true
             }
         },
+	{
+            "type": "shell",
+            "label": "C++ ASAN build for clang++",
+            "command": "clang++",
+            "args": [
+		"-std=c++11",
+		"-fsanitize=address",
+		"-g",
+		"${file}",
+		"-o",
+		"${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+		"cwd": "${workspaceRoot}"
+            },
+            "presentation": {
+		"clear": true
+            },
+            "group": {
+		"kind": "build",
+		"isDefault": true
+            },
+            "problemMatcher": []
+	},
+
         {
             "type": "shell",
             "label": "C/C++: g++ build active file",
             "command": "/usr/bin/g++",
             "args": [
-                //"-std=c++11",
+                "-std=c++11",
                 "-g",
                 "${file}",
-                "-√o",
+                "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
