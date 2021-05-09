@@ -8,32 +8,9 @@
         },
         {
             "type": "shell",
-            "label": "C build for clang",
-            "command": "clang",
+            "label": "C build for gcc",
+            "command": "gcc",
             "args": [
-                "-g",
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-                "cwd": "${workspaceRoot}"
-            },
-            "presentation": {
-                "clear": true
-            },
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": []
-        },
-        {
-            "type": "shell",
-            "label": "C++ build for clang++",
-            "command": "clang++",
-            "args": [
-                "-std=c++11",
                 "-g",
                 "${file}",
                 "-o",
@@ -62,51 +39,28 @@
         },
         {
             "type": "shell",
-            "label": "C/C++: clang++ build active file",
-            "command": "/usr/bin/clang++",
+            "label": "C++ ASAN build for g++",
+            "command": "g++",
             "args": [
                 "-std=c++11",
+                "-fsanitize=address",
                 "-g",
                 "${file}",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceRoot}"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "presentation": {
+                "clear": true
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
-        },
-	{
-            "type": "shell",
-            "label": "C++ ASAN build for clang++",
-            "command": "clang++",
-            "args": [
-		"-std=c++11",
-		"-fsanitize=address",
-		"-g",
-		"${file}",
-		"-o",
-		"${fileDirname}/${fileBasenameNoExtension}"
-            ],
-            "options": {
-		"cwd": "${workspaceRoot}"
-            },
-            "presentation": {
-		"clear": true
-            },
-            "group": {
-		"kind": "build",
-		"isDefault": true
             },
             "problemMatcher": []
-	},
-
+        },
         {
             "type": "shell",
             "label": "C/C++: g++ build active file",
