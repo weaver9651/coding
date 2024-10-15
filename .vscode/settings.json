@@ -1,13 +1,17 @@
 {
-    "files.associations": {
-      "vector": "cpp",
-      "__config": "cpp",
-      "deque": "cpp",
-      "string": "cpp",
-      "iostream": "cpp",
-      "iosfwd": "cpp",
-      "queue": "cpp",
-      "type_traits": "cpp",
-      "ostream": "cpp"
-    }
+  "files.associations": {
+    "vector": "cpp",
+    "__config": "cpp",
+    "deque": "cpp",
+    "string": "cpp",
+    "iostream": "cpp",
+    "iosfwd": "cpp",
+    "queue": "cpp",
+    "type_traits": "cpp",
+    "ostream": "cpp",
+    "__split_buffer": "cpp",
+    "array": "cpp",
+    "string_view": "cpp"
+  },
+  "cmake.configureOnOpen": false
 }

@@ -4,3 +4,5 @@ a.out
 
 # ignore MAC OS gud-gdb
 *.dSYM*
+
+.DS_Store

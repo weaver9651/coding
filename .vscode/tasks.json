@@ -2,11 +2,6 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "echo",
-            "type": "shell",
-            "command": "echo Hello"
-        },
-        {
             "type": "shell",
             "label": "C build for gcc",
             "command": "gcc",
@@ -32,10 +27,14 @@
             "type": "shell",
             "label": "execute",
             "command": "${fileDirname}/${fileBasenameNoExtension}",
-            "group": "test",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            },
             "presentation": {
                 "clear": true
-            }
+            },
+            "problemMatcher": []
         },
         {
             "type": "shell",
@@ -63,8 +62,8 @@
         },
         {
             "type": "shell",
-            "label": "C/C++: g++ build active file",
-            "command": "/usr/bin/g++",
+            "label": "C++ build for g++",
+            "command": "g++",
             "args": [
                 "-std=c++11",
                 "-g",
@@ -73,15 +72,16 @@
                 "${fileDirname}/${fileBasenameNoExtension}"
             ],
             "options": {
-                "cwd": "${workspaceFolder}"
+                "cwd": "${workspaceRoot}"
             },
-            "problemMatcher": [
-                "$gcc"
-            ],
+            "presentation": {
+                "clear": true
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true
-            }
-        }
+            },
+            "problemMatcher": []
+        },
     ]
 }
